@@ -21,7 +21,7 @@ namespace Lab1ADayAtTheRaces
         public Label MyLabel { get; set; }
         private Bet MyBet { get; set; }
 
-        public void PlaceBet(uint amt, int dog)
+        public void PlaceBet(uint amt, Dog dog)
         {
             if (!fHasPlacedBet)
             {
@@ -29,7 +29,7 @@ namespace Lab1ADayAtTheRaces
                 if (Cash >= MyBet.Amount)
                 {
                     Cash -= MyBet.Amount;
-                    MyLabel.Text = Name + "'s bet: " + MyBet.Amount + " on dog " + MyBet.Dog;
+                    MyLabel.Text = Name + "'s bet: " + MyBet.Amount + " on dog " + MyBet.Dog.Index;
                     fHasPlacedBet = true;
                 }
                 else
@@ -39,7 +39,7 @@ namespace Lab1ADayAtTheRaces
                 MessageBox.Show(Name + " has already placed a bet.");
         }
 
-        public void Collect(int winningDog)
+        public void Collect(Dog winningDog)
         {
             Cash += MyBet.PayOut(winningDog);
             MyLabel.Text = Name + "'s bet: ";

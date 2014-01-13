@@ -12,12 +12,15 @@ namespace Lab1ADayAtTheRaces
     public partial class Form1 : Form
     {
         private const int NumBettors = 3; // todo Why does this have to be static or const?
+        private const int NumDogs = 4;
+
         private Bettor fActiveBettor;
         private Bettor fJoe; 
         private Bettor fBob; 
         private Bettor fAlan;
-
         private Bettor[] fAllBettors = new Bettor[NumBettors];
+
+        private Dog[] fAllDogs = new Dog[NumDogs];
 
         public Form1()
         {
@@ -26,17 +29,28 @@ namespace Lab1ADayAtTheRaces
             // Populate the minimum bet in the label
             MinimumBetLabel.Text = "Minimum Bet: " + BetAmountChooser.Minimum;
 
-            // Initialize Bettors
-            fJoe  = new Bettor("Joe",  50, JoeRadioButton,  JoeLabel);
-            fBob  = new Bettor("Bob",  75, BobRadioButton,  BobLabel);
+            InitializeBettors();
+            InitializeDogs();
+            UpdateBettingParlour();
+        }
+        
+        public void InitializeBettors()
+        {
+            fJoe = new Bettor("Joe", 50, JoeRadioButton, JoeLabel);
+            fBob = new Bettor("Bob", 75, BobRadioButton, BobLabel);
             fAlan = new Bettor("Alan", 45, AlanRadioButton, AlanLabel);
 
             fAllBettors[0] = fJoe; // todo Is there a better way of doing this?
             fAllBettors[1] = fBob;
             fAllBettors[2] = fAlan;
+        }
 
-            // Redraw
-            this.UpdateBettingParlour();
+        public void InitializeDogs()
+        {
+            fAllDogs[0] = new Dog(Dog0Picture, 0);
+            fAllDogs[1] = new Dog(Dog1Picture, 1);
+            fAllDogs[2] = new Dog(Dog2Picture, 2);
+            fAllDogs[3] = new Dog(Dog3Picture, 3);
         }
 
         public void UpdateBettingParlour()
@@ -55,35 +69,59 @@ namespace Lab1ADayAtTheRaces
             }
         }
 
+        public Dog RunRaceAndReturnWinningDog()
+        {
+            bool raceOver = false;
+            
+            while (!raceOver)
+            {
+                for (int i = 0; i < NumDogs; i++)
+                {
+                    raceOver = raceOver || fAllDogs[i].RunOnePaceAndCheckIfWon();
+                    if (raceOver)
+                        return fAllDogs[i];
+                }
+            }
+
+            return null;
+        }
+
         private void JoeRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            this.UpdateBettingParlour();
+            UpdateBettingParlour();
         }
 
         private void BobRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            this.UpdateBettingParlour();
+            UpdateBettingParlour();
         }
 
         private void AlanRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            this.UpdateBettingParlour();
+            UpdateBettingParlour();
         }
 
         private void BetButton_Click(object sender, EventArgs e)
         {
-            fActiveBettor.PlaceBet((uint)BetAmountChooser.Value, (int)DogChooser.Value);
-            this.UpdateBettingParlour();
+            int j = (int)DogChooser.Value;
+            fActiveBettor.PlaceBet((uint)BetAmountChooser.Value, fAllDogs[j]);
+            UpdateBettingParlour();
         }
 
         private void RaceButton_Click(object sender, EventArgs e)
         {
-            int winningDog = 3;
+            // Reset the dogs
+            InitializeDogs();
+
+            // Run the race;
+            Dog winningDog = RunRaceAndReturnWinningDog();
+            
             for (int i = 0; i < NumBettors; i++)
             {
                 fAllBettors[i].Collect(winningDog);
             }
-            this.UpdateBettingParlour();
+
+            UpdateBettingParlour();
         }
     }
 }
