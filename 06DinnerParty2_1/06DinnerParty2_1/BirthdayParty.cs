@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace _05DinnerParty
 {
@@ -19,32 +20,37 @@ namespace _05DinnerParty
         {
             get
             {
-                return NumberOfPeople;
+                return base.NumberOfPeople;
             }
             set
             {
-                NumberOfPeople = value;
+                base.NumberOfPeople = value;
                 fCakeSize = NumberOfPeople <= 4 ? 8 : 16;
                 fCakeCost = NumberOfPeople <= 4 ? 40: 75;
                 fCakeMaxLetters = NumberOfPeople <= 4 ? 16 : 40;
             }
         }
 
-        private void SetCakeWriting(string cakeWriting)
+        public void SetCakeWriting(string cakeWriting)
         {
-            fCakeWriting = cakeWriting;
+            if (cakeWriting.Length <= fCakeMaxLetters)
+                fCakeWriting = cakeWriting;
+            else
+                MessageBox.Show("That writing is too long!");
+            
         }
 
-        public decimal CostOfCakeWriting()
+        public decimal CostOfCakeAndWriting()
         {
             decimal sum = fCakeCost;
-            sum += fCakeWriting.Length * CostOfWritingPerLetter;
+            int actualNumLetters = fCakeWriting.Count(c => !Char.IsWhiteSpace(c));
+            sum += actualNumLetters * CostOfWritingPerLetter;
             return sum;
         }
 
         public override decimal TotalCost()
         {
-            decimal sum = CostOfFood() + CostOfDecorations();
+            decimal sum = CostOfFood() + CostOfCakeAndWriting() + CostOfDecorations();
             if (NumberOfPeople == 0)
                 sum = 0;
 
