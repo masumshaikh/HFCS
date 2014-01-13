@@ -6,29 +6,15 @@ using System.Threading.Tasks;
 
 namespace _05DinnerParty
 {
-    public class DinnerParty
+    public class DinnerParty : Party
     {
-        private const decimal FoodChargePerPerson = 25.0M;
         private const decimal CostOfAlcPerPerson = 20.0M;
         private const decimal CostOfSodaPerPerson = 5.0M;
         private const double HealthyDiscount = 0.95;
-        private const decimal CostOfFancyDecPerPerson = 15.0M;
-        private const decimal CostOfNormalDecPerPerson = 7.50M;
-        private const decimal FlatFeeFancyDec = 50.0M;
-        private const decimal FlatFeeNormalDec = 30.0M;
-
 
         private decimal fCostOfBevPerPerson;
         private double fDiscount;
-        private decimal fCostOfDecPerPerson;
-        private decimal fFlatFeeDecoration;
 
-        public DinnerParty()
-        {
-        }
-
-        public int NumberOfPeople { get; set; }
-        
         public void SetHealthyOption(bool healthy)
         {
             switch (healthy)
@@ -44,22 +30,7 @@ namespace _05DinnerParty
             }
         }
 
-        public void SetFancyDecorations(bool fancy)
-        {
-            switch (fancy)
-            {
-                case true:
-                    fCostOfDecPerPerson = CostOfFancyDecPerPerson;
-                    fFlatFeeDecoration = FlatFeeFancyDec;
-                    break;
-                case false:
-                    fCostOfDecPerPerson = CostOfNormalDecPerPerson;
-                    fFlatFeeDecoration = FlatFeeNormalDec;
-                    break;
-            }
-        }
-
-        public decimal TotalCost()
+        public override decimal TotalCost()
         {
             decimal sum = FoodChargePerPerson * NumberOfPeople;
             sum += fCostOfBevPerPerson * NumberOfPeople;
@@ -71,5 +42,11 @@ namespace _05DinnerParty
 
             return sum;
         }
-}
+
+        public override void SetOptions(Form1 form1)
+        {
+            SetFancyDecorations(form1.ChkBoxFancy.Checked);
+            SetHealthyOption(form1.ChkBoxHealthy.Checked);
+        }
+    }
 }

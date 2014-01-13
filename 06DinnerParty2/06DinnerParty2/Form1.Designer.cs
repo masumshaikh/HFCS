@@ -33,13 +33,13 @@
             this.ChkBoxHealthy = new System.Windows.Forms.CheckBox();
             this.ChkBoxFancy = new System.Windows.Forms.CheckBox();
             this.LabelCostDisplay = new System.Windows.Forms.Label();
-            this.tabPartyType = new System.Windows.Forms.TabControl();
+            this.TabPartyType = new System.Windows.Forms.TabControl();
             this.TabPageDinnerParty = new System.Windows.Forms.TabPage();
             this.TabPageBirthdayParty = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.LabelCakeWriting = new System.Windows.Forms.Label();
+            this.TextBoxCakeWriting = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownNumPeople)).BeginInit();
-            this.tabPartyType.SuspendLayout();
+            this.TabPartyType.SuspendLayout();
             this.TabPageDinnerParty.SuspendLayout();
             this.TabPageBirthdayParty.SuspendLayout();
             this.SuspendLayout();
@@ -93,15 +93,15 @@
             this.LabelCostDisplay.TabIndex = 4;
             this.LabelCostDisplay.Text = "Total Cost: ";
             // 
-            // tabPartyType
+            // TabPartyType
             // 
-            this.tabPartyType.Controls.Add(this.TabPageDinnerParty);
-            this.tabPartyType.Controls.Add(this.TabPageBirthdayParty);
-            this.tabPartyType.Location = new System.Drawing.Point(15, 100);
-            this.tabPartyType.Name = "tabPartyType";
-            this.tabPartyType.SelectedIndex = 0;
-            this.tabPartyType.Size = new System.Drawing.Size(200, 112);
-            this.tabPartyType.TabIndex = 5;
+            this.TabPartyType.Controls.Add(this.TabPageDinnerParty);
+            this.TabPartyType.Controls.Add(this.TabPageBirthdayParty);
+            this.TabPartyType.Location = new System.Drawing.Point(15, 100);
+            this.TabPartyType.Name = "TabPartyType";
+            this.TabPartyType.SelectedIndex = 0;
+            this.TabPartyType.Size = new System.Drawing.Size(200, 112);
+            this.TabPartyType.TabIndex = 5;
             // 
             // TabPageDinnerParty
             // 
@@ -117,7 +117,7 @@
             // TabPageBirthdayParty
             // 
             this.TabPageBirthdayParty.Controls.Add(this.LabelCakeWriting);
-            this.TabPageBirthdayParty.Controls.Add(this.textBox1);
+            this.TabPageBirthdayParty.Controls.Add(this.TextBoxCakeWriting);
             this.TabPageBirthdayParty.Location = new System.Drawing.Point(4, 22);
             this.TabPageBirthdayParty.Name = "TabPageBirthdayParty";
             this.TabPageBirthdayParty.Padding = new System.Windows.Forms.Padding(3);
@@ -125,14 +125,6 @@
             this.TabPageBirthdayParty.TabIndex = 1;
             this.TabPageBirthdayParty.Text = "Birthday Party";
             this.TabPageBirthdayParty.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(0, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(155, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "Happy Birthday!";
             // 
             // LabelCakeWriting
             // 
@@ -143,12 +135,20 @@
             this.LabelCakeWriting.TabIndex = 1;
             this.LabelCakeWriting.Text = "Cake Writing:";
             // 
+            // TextBoxCakeWriting
+            // 
+            this.TextBoxCakeWriting.Location = new System.Drawing.Point(0, 22);
+            this.TextBoxCakeWriting.Name = "TextBoxCakeWriting";
+            this.TextBoxCakeWriting.Size = new System.Drawing.Size(155, 20);
+            this.TextBoxCakeWriting.TabIndex = 0;
+            this.TextBoxCakeWriting.Text = "Happy Birthday!";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 311);
-            this.Controls.Add(this.tabPartyType);
+            this.Controls.Add(this.TabPartyType);
             this.Controls.Add(this.LabelCostDisplay);
             this.Controls.Add(this.ChkBoxFancy);
             this.Controls.Add(this.UpDownNumPeople);
@@ -156,7 +156,7 @@
             this.Name = "Form1";
             this.Text = "Party Planner";
             ((System.ComponentModel.ISupportInitialize)(this.UpDownNumPeople)).EndInit();
-            this.tabPartyType.ResumeLayout(false);
+            this.TabPartyType.ResumeLayout(false);
             this.TabPageDinnerParty.ResumeLayout(false);
             this.TabPageDinnerParty.PerformLayout();
             this.TabPageBirthdayParty.ResumeLayout(false);
@@ -170,14 +170,14 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown UpDownNumPeople;
-        private System.Windows.Forms.CheckBox ChkBoxHealthy;
-        private System.Windows.Forms.CheckBox ChkBoxFancy;
+        public System.Windows.Forms.CheckBox ChkBoxHealthy;
+        public System.Windows.Forms.CheckBox ChkBoxFancy;
         private System.Windows.Forms.Label LabelCostDisplay;
-        private System.Windows.Forms.TabControl tabPartyType;
+        private System.Windows.Forms.TabControl TabPartyType;
         private System.Windows.Forms.TabPage TabPageDinnerParty;
         private System.Windows.Forms.TabPage TabPageBirthdayParty;
         private System.Windows.Forms.Label LabelCakeWriting;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TextBoxCakeWriting;
     }
 }
 

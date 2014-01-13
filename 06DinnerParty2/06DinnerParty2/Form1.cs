@@ -12,7 +12,7 @@ namespace _05DinnerParty
 {
     public partial class Form1 : Form
     {
-        private DinnerParty dP = new DinnerParty();
+        private Party dP;
 
         public Form1()
         {
@@ -22,8 +22,7 @@ namespace _05DinnerParty
 
         public void UpdateCostDisplay()
         {
-            dP.SetHealthyOption(ChkBoxHealthy.Checked);
-            dP.SetFancyDecorations(ChkBoxFancy.Checked);
+            dP.SetOptions(this);
             dP.NumberOfPeople = (int)UpDownNumPeople.Value;
             LabelCostDisplay.Text = "Total Cost: " + dP.TotalCost().ToString("c");
         }
