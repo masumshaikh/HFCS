@@ -12,5 +12,10 @@ namespace _06Page251DerivedClassesCtors
         {
             MessageBox.Show("This is the base class: " + baseClassNeedsThis);
         }
+
+        public virtual void MyMethod()
+        {
+            MessageBox.Show("This is MyMethod() in the base class: ");
+        }
     }
 }

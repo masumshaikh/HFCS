@@ -25,5 +25,12 @@ namespace _06Page251DerivedClassesCtors
         {
             DerivedClass derivedObject = new DerivedClass("base class string", "derived class string");
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            BaseClass b = new DerivedClass("1", "2");
+            b.MyMethod();
+
+        }
     }
 }

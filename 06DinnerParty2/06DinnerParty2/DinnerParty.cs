@@ -11,7 +11,7 @@ namespace _05DinnerParty
         private const decimal FoodChargePerPerson = 25.0M;
         private const decimal CostOfAlcPerPerson = 20.0M;
         private const decimal CostOfSodaPerPerson = 5.0M;
-        private const double fHealthyDiscount = 0.95;
+        private const double HealthyDiscount = 0.95;
         private const decimal CostOfFancyDecPerPerson = 15.0M;
         private const decimal CostOfNormalDecPerPerson = 7.50M;
         private const decimal FlatFeeFancyDec = 50.0M;
@@ -34,7 +34,7 @@ namespace _05DinnerParty
             switch (healthy)
             {
                 case true:
-                    fDiscount = fHealthyDiscount;
+                    fDiscount = HealthyDiscount;
                     fCostOfBevPerPerson = CostOfSodaPerPerson;
                     break;
                 case false:

@@ -14,5 +14,9 @@ namespace _06Page251DerivedClassesCtors
             MessageBox.Show("This is the derived Class: " + derivedClassAlsoNeedsThis);
         }
 
+        public override void MyMethod()
+        {
+            MessageBox.Show("This is MyMethod() in the derived class: ");
+        }
     }
 }
