@@ -41,8 +41,19 @@ namespace _06BeehiveManagement
         {
             get
             {
-                return 
+                if (!fIsBusy)
+                    fReport = " is idle.";
+                else
+                {
+                    if (ShiftsLeft == 1)
+                        fReport = " will be done with " + fCurrentJob + " after the next shift.";
+                    else
+                        fReport = " was working on " + fCurrentJob + " this shift, and has " + ShiftsLeft + " shifts left.";
+                }
+
+                return fReport;
             }
+
             private set
             {
                 fReport = value;
