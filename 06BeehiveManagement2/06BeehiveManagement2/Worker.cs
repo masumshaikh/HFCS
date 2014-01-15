@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace _06BeehiveManagement
+namespace _06BeehiveManagement2
 {
     public class Worker
     {
