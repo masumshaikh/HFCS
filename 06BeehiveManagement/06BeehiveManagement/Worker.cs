@@ -39,25 +39,8 @@ namespace _06BeehiveManagement
 
         public string Report
         {
-            get
-            {
-                if (!fIsBusy)
-                    fReport = " is idle.";
-                else
-                {
-                    if (ShiftsLeft == 1)
-                        fReport = " will be done with " + fCurrentJob + " after the next shift.";
-                    else
-                        fReport = " was working on " + fCurrentJob + " this shift, and has " + ShiftsLeft + " shifts left.";
-                }
-
-                return fReport;
-            }
-
-            private set
-            {
-                fReport = value;
-            }
+            get { return fReport; }
+            private set { fReport = value; }
         }
 
         public bool TryReceiveJob(string job, int numShiftsRequired)
@@ -67,17 +50,15 @@ namespace _06BeehiveManagement
                 if (fJobsICanDo.Any(t => string.Equals(job, t)))
                     StartJob(job, numShiftsRequired);
 
+                // If worker is not busy but no job could be found, then update report to say so.
+                // Reports are as of END of shift, hence "was" and not "is".
+                if (!fIsBusy) 
+                    fReport = " was idle";
+
                 return fIsBusy;
             }
             else
                 return false;
-        }
-
-        public void WorkOneShift()
-        {
-            fShiftsDoneOnCurrentJob++;
-            if (fShiftsDoneOnCurrentJob == fTotalShiftsRequiredForCurrentJob)
-                CompleteJob();
         }
 
         private void StartJob(string job, int numShiftsRequired)
@@ -86,6 +67,27 @@ namespace _06BeehiveManagement
             fCurrentJob = job;
             fTotalShiftsRequiredForCurrentJob = numShiftsRequired;
             fShiftsDoneOnCurrentJob = 0;
+        }
+
+        public void WorkOneShift()
+        {
+            if (fIsBusy)
+            {
+                fShiftsDoneOnCurrentJob++;
+
+                // Update worker's report. Reports are as of END of shift.
+                if (ShiftsLeft >= 2)
+                    fReport = " was working on " + fCurrentJob + " this shift, and has " + ShiftsLeft + " shifts left.";
+                else if (ShiftsLeft == 1)
+                    fReport = " will be done with " + fCurrentJob + " after the next shift.";
+                else
+                    fReport = " completed " + fCurrentJob + ".";
+
+                if (fShiftsDoneOnCurrentJob == fTotalShiftsRequiredForCurrentJob)
+                    CompleteJob();
+            }
+            else
+                fReport = " was idle";
         }
 
         private void CompleteJob()
