@@ -39,6 +39,17 @@ namespace Ch7_House
             DoorDescription = doorDescription;
         }
 
+        public override string Description
+        {
+            get
+            {
+                string description = base.Description;
+                description += string.Format(" You see {0} here.", DoorDescription);
+                description += string.Format(" The door leads to the {0}.", DoorLeadsTo.Name);
+                return description;
+            }
+        }
+
         public string DoorDescription { get; private set; }
         public Location DoorLeadsTo { get; internal set; }
     }

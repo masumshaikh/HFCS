@@ -30,6 +30,8 @@ namespace Ch7_House
 
             this.fGarden.Exits = new Location[] { this.fFrontYard, this.fBackYard };
             this.fDiningRoom.Exits = new Location[] { this.fLivingRoom, this.fKitchen };
+
+            CurrentLocation = Garden;
         }
 
         #region Property definitions exposing private location fields
@@ -66,14 +68,14 @@ namespace Ch7_House
 
         public Location CurrentLocation { get; set; }
 
-        public bool CanSeeDoor(Location from)
+        public bool CanSeeDoorFrom(Location from)
         {
             return from is IHasExteriorDoor;
         }
 
         public bool TryMoveToANewLocation(Location from, Location to)
         {
-            if (from.Exits.Contains(to))
+            if (from.Exits.Contains(to) || (from as IHasExteriorDoor).DoorLeadsTo == to)
             {
                 CurrentLocation = to;
                 return true;

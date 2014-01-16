@@ -31,7 +31,7 @@ namespace Ch7_House
                 for (int i = 0; i < Exits.Length; i++)
                 {
                     description += string.Format(" {0}", Exits[i].fName);
-                    if (i < Exits.Length)
+                    if (i < Exits.Length - 1)
                         description += ",";
                 }
 
@@ -41,7 +41,7 @@ namespace Ch7_House
             }
         }
 
-        protected string Name
+        public string Name
         {
             get { return fName; }
         }
