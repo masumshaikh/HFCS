@@ -33,6 +33,9 @@
             this.BtnGoToLocation = new System.Windows.Forms.Button();
             this.CboxExits = new System.Windows.Forms.ComboBox();
             this.BtnGoThroughDoor = new System.Windows.Forms.Button();
+            this.BtnCheckHidingPlace = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.TxtBoxGameStatus = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // LblCurrentLocation
@@ -50,7 +53,7 @@
             this.TxtBoxCurrLocDescription.Location = new System.Drawing.Point(26, 46);
             this.TxtBoxCurrLocDescription.Multiline = true;
             this.TxtBoxCurrLocDescription.Name = "TxtBoxCurrLocDescription";
-            this.TxtBoxCurrLocDescription.Size = new System.Drawing.Size(492, 117);
+            this.TxtBoxCurrLocDescription.Size = new System.Drawing.Size(225, 117);
             this.TxtBoxCurrLocDescription.TabIndex = 1;
             // 
             // BtnGoToLocation
@@ -83,11 +86,42 @@
             this.BtnGoThroughDoor.UseVisualStyleBackColor = true;
             this.BtnGoThroughDoor.Click += new System.EventHandler(this.BtnGoThroughDoor_Click);
             // 
+            // BtnCheckHidingPlace
+            // 
+            this.BtnCheckHidingPlace.Location = new System.Drawing.Point(26, 275);
+            this.BtnCheckHidingPlace.Name = "BtnCheckHidingPlace";
+            this.BtnCheckHidingPlace.Size = new System.Drawing.Size(492, 21);
+            this.BtnCheckHidingPlace.TabIndex = 5;
+            this.BtnCheckHidingPlace.Text = "Check hiding place ...";
+            this.BtnCheckHidingPlace.UseVisualStyleBackColor = true;
+            this.BtnCheckHidingPlace.Click += new System.EventHandler(this.BtnCheckHidingPlace_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(26, 345);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(492, 21);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "HIDE";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // TxtBoxGameStatus
+            // 
+            this.TxtBoxGameStatus.Location = new System.Drawing.Point(293, 46);
+            this.TxtBoxGameStatus.Multiline = true;
+            this.TxtBoxGameStatus.Name = "TxtBoxGameStatus";
+            this.TxtBoxGameStatus.Size = new System.Drawing.Size(225, 117);
+            this.TxtBoxGameStatus.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 262);
+            this.ClientSize = new System.Drawing.Size(544, 402);
+            this.Controls.Add(this.TxtBoxGameStatus);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnCheckHidingPlace);
             this.Controls.Add(this.BtnGoThroughDoor);
             this.Controls.Add(this.CboxExits);
             this.Controls.Add(this.BtnGoToLocation);
@@ -107,6 +141,9 @@
         private System.Windows.Forms.Button BtnGoToLocation;
         private System.Windows.Forms.ComboBox CboxExits;
         private System.Windows.Forms.Button BtnGoThroughDoor;
+        private System.Windows.Forms.Button BtnCheckHidingPlace;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox TxtBoxGameStatus;
     }
 }
 

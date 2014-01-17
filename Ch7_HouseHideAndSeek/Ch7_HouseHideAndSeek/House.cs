@@ -8,17 +8,17 @@ namespace Ch7_HouseHideAndSeek
     public class House
     {
         private readonly Room fDiningRoom = new Room("Dining Room", "a crystal chandelier");
-        private readonly RoomWithHidingPlaceAndDoor fLivingRoom = new RoomWithHidingPlaceAndDoor("Living Room", "an antique carpet", "an oak door with a brass knob", "inside the closet");
-        private readonly RoomWithHidingPlaceAndDoor fKitchen = new RoomWithHidingPlaceAndDoor("Kitchen", "baroque tiles", "a screen door", "in the cabinet");
+        private readonly RoomWithHidingPlaceAndDoor fLivingRoom = new RoomWithHidingPlaceAndDoor("Living Room", "an antique carpet", "inside the closet", "an oak door with a brass knob");
+        private readonly RoomWithHidingPlaceAndDoor fKitchen = new RoomWithHidingPlaceAndDoor("Kitchen", "baroque tiles", "in the cabinet", "a screen door");
         private readonly OutsideWithDoor fFrontYard = new OutsideWithDoor("Front Yard", false, "an oak door with a brass knob");
         private readonly OutsideWithDoor fBackYard = new OutsideWithDoor("Back Yard", true, "a screen door");
 
         private readonly Room fStairs = new Room("Stairs", "a wooden bannister");
         private readonly RoomWithHidingPlace fUpstairsHallway = new RoomWithHidingPlace("Upstairs Hallway", "a picture of a dog", "a closet");
 
-        private readonly RoomWithHidingPlace fMasterBedroom = new RoomWithHidingPlace("Master Bedroom", "a four-post bed", "under the bed");
-        private readonly RoomWithHidingPlace fSecondBedroom = new RoomWithHidingPlace("Second Bedroom", "a Moroccan bed", "under the bed");
-        private readonly RoomWithHidingPlace fBathroom = new RoomWithHidingPlace("Bathroom", "a sink and toilet", "in the shower");
+        private readonly RoomWithHidingPlace fMasterBedroom = new RoomWithHidingPlace("Master Bedroom", "under the bed", "a four-post bed");
+        private readonly RoomWithHidingPlace fSecondBedroom = new RoomWithHidingPlace("Second Bedroom", "under the bed", "a Moroccan bed");
+        private readonly RoomWithHidingPlace fBathroom = new RoomWithHidingPlace("Bathroom", "in the shower", "a sink and toilet");
 
         private readonly OutsideWithHidingPlace fDriveway = new OutsideWithHidingPlace("Driveway", true, "in the garage");
         private readonly OutsideWithHidingPlace fGarden = new OutsideWithHidingPlace("Garden", false, "in the shed");

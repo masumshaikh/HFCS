@@ -53,10 +53,6 @@ namespace Ch8_Cards
         private static Random fRandom = new Random();
         public static void Main()
         {
-            ////MessageBox.Show(((int)Values.Ace).ToString());
-            ////MessageBox.Show((Values.Ace).ToString());
-            ////MessageBox.Show(((Suits)3).ToString());
-
             int numValues = Enum.GetNames(typeof(Values)).Length;
             int numSuits = Enum.GetNames(typeof(Suits)).Length;
 
@@ -64,7 +60,7 @@ namespace Ch8_Cards
             int nextSuit = fRandom.Next(numSuits);
 
             ///Card x = new Card((Values)nextValue, (Suits)nextSuit);
-            Card x = new Card(nextValue, nextSuit);
+            Card x = new Card((Values)nextValue, (Suits)nextSuit);
             MessageBox.Show(x.ToString() + nextValue + ", " + nextSuit);
         }
     }
