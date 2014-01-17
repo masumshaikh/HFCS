@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Ch7_HouseHideAndSeek
 {
-    public interface IHasExteriorDoor
+    public interface IHazExteriorDoor
     {
         string DoorDescription { get; }
         Location DoorLeadsTo { get; }
     }
 
-    public interface IHidingPlace
+    public interface IHazHidingPlace
     {
         string HidingPlace { get; }
     }

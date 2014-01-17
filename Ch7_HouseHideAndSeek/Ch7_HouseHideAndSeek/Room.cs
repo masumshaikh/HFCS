@@ -7,7 +7,8 @@ namespace Ch7_HouseHideAndSeek
 {
     public class Room : Location
     {
-        public Room(string name, string decoration) : base(name)
+        public Room(string name, string decoration)
+            : base(name)
         {
             Decoration = decoration;
         }
@@ -20,10 +21,21 @@ namespace Ch7_HouseHideAndSeek
         }
     }
 
-    public class RoomWithDoor : Room, IHasExteriorDoor
+    public class RoomWithHidingPlace : Room, IHazHidingPlace
     {
-        public RoomWithDoor(string name, string decoration, string doorDescription)
+        public RoomWithHidingPlace(string name, string decoration, string hidingPlace)
             : base(name, decoration)
+        {
+            HidingPlace = hidingPlace;
+        }
+
+        public string HidingPlace { get; private set; }
+    }
+
+    public class RoomWithHidingPlaceAndDoor : RoomWithHidingPlace, IHazExteriorDoor
+    {
+        public RoomWithHidingPlaceAndDoor(string name, string decoration, string hidingPlace, string doorDescription)
+            : base(name, decoration, hidingPlace)
         {
             DoorDescription = doorDescription;
         }

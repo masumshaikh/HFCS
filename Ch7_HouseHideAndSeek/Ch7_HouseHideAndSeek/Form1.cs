@@ -53,7 +53,7 @@ namespace Ch7_HouseHideAndSeek
         private void BtnGoThroughDoor_Click(object sender, EventArgs e)
         {
             Location currentLoc = fHouse.CurrentLocation ;
-            Location destination = (currentLoc as IHasExteriorDoor).DoorLeadsTo;
+            Location destination = (currentLoc as IHazExteriorDoor).DoorLeadsTo;
 
             // Next line will change the .CurrentLocation property of the house.
             bool managedToMove = fHouse.TryMoveToANewLocation(currentLoc, destination);

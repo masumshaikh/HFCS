@@ -31,7 +31,7 @@ namespace Ch7_HouseHideAndSeek
         }
     }
 
-    public class OutsideWithDoor : Outside, IHasExteriorDoor
+    public class OutsideWithDoor : Outside, IHazExteriorDoor
     {
         public OutsideWithDoor(string name, bool hot, string doorDescription)
             : base(name, hot)
@@ -52,5 +52,16 @@ namespace Ch7_HouseHideAndSeek
 
         public string DoorDescription { get; private set; }
         public Location DoorLeadsTo { get; internal set; }
+    }
+
+    public class OutsideWithHidingPlace : Outside, IHazHidingPlace
+    {
+        public OutsideWithHidingPlace(string name, bool hot, string hidingPlace)
+            : base(name, hot)
+        {
+            HidingPlace = hidingPlace;
+        }
+
+        public string HidingPlace { get; private set; }
     }
 }

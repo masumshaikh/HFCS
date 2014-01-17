@@ -40,9 +40,7 @@ namespace Lab1ADayAtTheRaces
             fBob = new Bettor("Bob", 75, BobRadioButton, BobLabel);
             fAlan = new Bettor("Alan", 45, AlanRadioButton, AlanLabel);
 
-            fAllBettors[0] = fJoe; // todo Is there a better way of doing this?
-            fAllBettors[1] = fBob;
-            fAllBettors[2] = fAlan;
+            fAllBettors = new[] { fJoe, fBob, fAlan };
         }
 
         public void InitializeDogs()

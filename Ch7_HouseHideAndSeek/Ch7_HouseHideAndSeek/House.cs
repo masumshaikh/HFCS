@@ -7,29 +7,45 @@ namespace Ch7_HouseHideAndSeek
 {
     public class House
     {
-        private readonly Outside fGarden = new Outside("garden", false);
         private readonly Room fDiningRoom = new Room("Dining Room", "a crystal chandelier");
-        private readonly RoomWithDoor fLivingRoom = new RoomWithDoor("Living Room", "an antique carpet", "an oak door with a brass knob");
-        private readonly RoomWithDoor fKitchen = new RoomWithDoor("Kitchen", "baroque tiles", "a screen door");
+        private readonly RoomWithHidingPlaceAndDoor fLivingRoom = new RoomWithHidingPlaceAndDoor("Living Room", "an antique carpet", "an oak door with a brass knob", "inside the closet");
+        private readonly RoomWithHidingPlaceAndDoor fKitchen = new RoomWithHidingPlaceAndDoor("Kitchen", "baroque tiles", "a screen door", "in the cabinet");
         private readonly OutsideWithDoor fFrontYard = new OutsideWithDoor("Front Yard", false, "an oak door with a brass knob");
         private readonly OutsideWithDoor fBackYard = new OutsideWithDoor("Back Yard", true, "a screen door");
 
+        private readonly Room fStairs = new Room("Stairs", "a wooden bannister");
+        private readonly RoomWithHidingPlace fUpstairsHallway = new RoomWithHidingPlace("Upstairs Hallway", "a picture of a dog", "a closet");
+
+        private readonly RoomWithHidingPlace fMasterBedroom = new RoomWithHidingPlace("Master Bedroom", "a four-post bed", "under the bed");
+        private readonly RoomWithHidingPlace fSecondBedroom = new RoomWithHidingPlace("Second Bedroom", "a Moroccan bed", "under the bed");
+        private readonly RoomWithHidingPlace fBathroom = new RoomWithHidingPlace("Bathroom", "a sink and toilet", "in the shower");
+
+        private readonly OutsideWithHidingPlace fDriveway = new OutsideWithHidingPlace("Driveway", true, "in the garage");
+        private readonly OutsideWithHidingPlace fGarden = new OutsideWithHidingPlace("Garden", false, "in the shed");
+
         public House()
         {
-            this.fFrontYard.DoorLeadsTo = this.fLivingRoom;
-            this.fFrontYard.Exits = new Location[] { this.fBackYard, this.fGarden };
+            fFrontYard.DoorLeadsTo = fLivingRoom;
+            fFrontYard.Exits = new Location[] { fBackYard, fGarden, fDriveway };
 
-            this.fBackYard.DoorLeadsTo = this.fKitchen;
-            this.fBackYard.Exits = new Location[] { this.fFrontYard, this.fGarden };
+            fBackYard.DoorLeadsTo = fKitchen;
+            fBackYard.Exits = new Location[] { fFrontYard, fGarden, fDriveway };
 
-            this.fLivingRoom.DoorLeadsTo = this.fFrontYard;
-            this.fLivingRoom.Exits = new Location[] { this.fDiningRoom };
+            fLivingRoom.DoorLeadsTo = fFrontYard;
+            fLivingRoom.Exits = new Location[] { fDiningRoom, fStairs };
 
-            this.fKitchen.DoorLeadsTo = this.fBackYard;
-            this.fKitchen.Exits = new Location[] { this.fDiningRoom };
+            fKitchen.DoorLeadsTo = fBackYard;
+            fKitchen.Exits = new Location[] { fDiningRoom };
 
-            this.fGarden.Exits = new Location[] { this.fFrontYard, this.fBackYard };
-            this.fDiningRoom.Exits = new Location[] { this.fLivingRoom, this.fKitchen };
+            fGarden.Exits = new Location[] { fFrontYard, fBackYard };
+            fDiningRoom.Exits = new Location[] { fLivingRoom, fKitchen };
+
+            fStairs.Exits = new Location[] { fLivingRoom, fUpstairsHallway };
+            fUpstairsHallway.Exits = new Location[] { fMasterBedroom, fSecondBedroom, fBathroom, fStairs };
+            fMasterBedroom.Exits = new Location[] { fUpstairsHallway };
+            fSecondBedroom.Exits = new Location[] { fUpstairsHallway };
+            fBathroom.Exits = new Location[] { fUpstairsHallway };
+            fDriveway.Exits = new Location[] { fFrontYard, fBackYard };
 
             CurrentLocation = Garden;
         }
@@ -45,12 +61,12 @@ namespace Ch7_HouseHideAndSeek
             get { return fDiningRoom; }
         }
 
-        public RoomWithDoor LivingRoom
+        public RoomWithHidingPlaceAndDoor LivingRoom
         {
             get { return fLivingRoom; }
         }
 
-        public RoomWithDoor Kitchen
+        public RoomWithHidingPlaceAndDoor Kitchen
         {
             get { return fKitchen; }
         }
@@ -64,18 +80,48 @@ namespace Ch7_HouseHideAndSeek
         {
             get { return fBackYard; }
         }
+
+        public RoomWithHidingPlace MasterBedroom
+        {
+            get { return fMasterBedroom; }
+        }
+
+        public RoomWithHidingPlace SecondBedroom
+        {
+            get { return fSecondBedroom; }
+        }
+
+        public RoomWithHidingPlace Bathroom
+        {
+            get { return fBathroom; }
+        }
+
+        public Room Stairs
+        {
+            get { return fStairs; }
+        }
+
+        public RoomWithHidingPlace UpstairsHallway
+        {
+            get { return fUpstairsHallway; }
+        }
+
+        public OutsideWithHidingPlace Driveway
+        {
+            get { return fDriveway; }
+        }
         #endregion
 
         public Location CurrentLocation { get; set; }
 
         public bool CanSeeDoorFrom(Location from)
         {
-            return from is IHasExteriorDoor;
+            return from is IHazExteriorDoor;
         }
 
         public bool TryMoveToANewLocation(Location from, Location to)
         {
-            if (from.Exits.Contains(to) || (from as IHasExteriorDoor).DoorLeadsTo == to)
+            if (from.Exits.Contains(to) || (from as IHazExteriorDoor).DoorLeadsTo == to)
             {
                 CurrentLocation = to;
                 return true;
