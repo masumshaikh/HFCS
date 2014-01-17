@@ -16,20 +16,35 @@ namespace Ch7_HouseHideAndSeek
         public Form1()
         {
             InitializeComponent();
-            UpdateForm();
+            InitializeForm();
         }
 
-        private void TestGame()
+        private void InitializeForm()
         {
-            
+            // Show only HIDE button, no description, instruction for starting game
+            BtnGoToLocation.Visible = false;
+            CboxExits.Visible = false;
+            BtnGoThroughDoor.Visible = false;
+            BtnCheckHidingPlace.Visible = false;
+            LblCurrentLocation.Visible = false;
+            BtnHide.Visible = true;
+            TxtBoxCurrLocDescription.Visible = false;
+            TxtBoxGameStatus.Text = fGame.GameStatus;
         }
 
         private void UpdateForm()
         {
             // Update text fields
             Location currentLoc = fGame.House.CurrentLocation;
+
             LblCurrentLocation.Text = "You are in the " + currentLoc.Name + ".";
+            LblCurrentLocation.Visible = true;
+
             TxtBoxCurrLocDescription.Text = currentLoc.Description;
+            TxtBoxCurrLocDescription.Visible = true;
+
+            // Reshow the goto location button
+            BtnGoToLocation.Visible = true;
 
             // Update combo box
             CboxExits.Items.Clear();
@@ -39,6 +54,7 @@ namespace Ch7_HouseHideAndSeek
             }
 
             CboxExits.SelectedIndex = 0;
+            CboxExits.Visible = true;
 
             // Show or hide "go through door" button
             BtnGoThroughDoor.Visible = fGame.House.CanSeeDoorFrom(currentLoc);
@@ -51,15 +67,6 @@ namespace Ch7_HouseHideAndSeek
 
             // Game Status
             TxtBoxGameStatus.Text = fGame.GameStatus;
-
-            if (fGame.NumMoves == 0)
-                ResetForm();
-        }
-
-        private void ResetForm()
-        {
-            BtnGoThroughDoor.Visible = false;
-            BtnCheckHidingPlace.Visible = false;
         }
 
         private void BtnGoToLocation_Click(object sender, EventArgs e)
@@ -91,10 +98,14 @@ namespace Ch7_HouseHideAndSeek
         {
             string msg = fGame.IsOpponentFound ? "You got me!" : "Try again!";
             MessageBox.Show(msg);
+            fGame.StartGame();
+            InitializeForm();
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BtnHide_Click(object sender, EventArgs e)
         {
+            fGame.StartGame();
             this.UpdateForm();
         }
     }

@@ -34,7 +34,7 @@
             this.CboxExits = new System.Windows.Forms.ComboBox();
             this.BtnGoThroughDoor = new System.Windows.Forms.Button();
             this.BtnCheckHidingPlace = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnHide = new System.Windows.Forms.Button();
             this.TxtBoxGameStatus = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -96,15 +96,15 @@
             this.BtnCheckHidingPlace.UseVisualStyleBackColor = true;
             this.BtnCheckHidingPlace.Click += new System.EventHandler(this.BtnCheckHidingPlace_Click);
             // 
-            // button1
+            // BtnHide
             // 
-            this.button1.Location = new System.Drawing.Point(26, 345);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(492, 21);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "HIDE";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BtnHide.Location = new System.Drawing.Point(26, 345);
+            this.BtnHide.Name = "BtnHide";
+            this.BtnHide.Size = new System.Drawing.Size(492, 21);
+            this.BtnHide.TabIndex = 6;
+            this.BtnHide.Text = "HIDE";
+            this.BtnHide.UseVisualStyleBackColor = true;
+            this.BtnHide.Click += new System.EventHandler(this.BtnHide_Click);
             // 
             // TxtBoxGameStatus
             // 
@@ -120,7 +120,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(544, 402);
             this.Controls.Add(this.TxtBoxGameStatus);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnHide);
             this.Controls.Add(this.BtnCheckHidingPlace);
             this.Controls.Add(this.BtnGoThroughDoor);
             this.Controls.Add(this.CboxExits);
@@ -142,7 +142,7 @@
         private System.Windows.Forms.ComboBox CboxExits;
         private System.Windows.Forms.Button BtnGoThroughDoor;
         private System.Windows.Forms.Button BtnCheckHidingPlace;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnHide;
         private System.Windows.Forms.TextBox TxtBoxGameStatus;
     }
 }

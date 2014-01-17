@@ -15,6 +15,7 @@ namespace Ch7_HouseHideAndSeek
             House = new House();
             fOpponent = new Opponent(House.LivingRoom);
             NumMoves = 0;
+            GameStarted = false;
         }
 
         public House House { get; set; }
@@ -25,20 +26,28 @@ namespace Ch7_HouseHideAndSeek
             get { return fOpponent.CheckAmIHidingHere(House.CurrentLocation); } 
         }
 
+        public bool GameStarted { get; private set; }
+
         public bool GameOver
         {
             get
-            { return (IsOpponentFound || NumMoves == fMaxMoves); }
+            { return GameStarted && (IsOpponentFound || NumMoves == fMaxMoves); }
         }
 
         public string GameStatus
         {
             get
             {
-                if (GameOver)
-                    return IsOpponentFound ? "You found me in " + NumMoves + "moves :-(" : "You didn't find me - I win!";
+                if (!GameStarted)
+                    return "Press Hide to begin.";
+
                 else
-                    return "You have " + (fMaxMoves - NumMoves) + " moves left.";
+                {
+                    if (GameOver)
+                        return IsOpponentFound ? "You found me in " + NumMoves + "moves :-(" : "You didn't find me - I win!";
+                    else
+                        return "You have " + (fMaxMoves - NumMoves) + " moves left.";
+                }
             }
         }
         
@@ -50,9 +59,10 @@ namespace Ch7_HouseHideAndSeek
 
         public void StartGame()
         {
+            GameStarted = true;
             NumMoves = 0;
-            for (int i = 1; i < 10; i++)
-                MoveOpponent();
+            //for (int i = 1; i < 10; i++)
+            //    MoveOpponent();
         }
     }
 }
