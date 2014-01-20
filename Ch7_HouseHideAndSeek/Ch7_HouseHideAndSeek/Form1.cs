@@ -16,13 +16,13 @@ namespace Ch7_HouseHideAndSeek
         public Form1()
         {
             InitializeComponent();
-            InitializeForm();
+         
+            fGame.GameStatus = Game.GameStatusEnum.InitialStatus;
+            this.ResetForm();
         }
 
-        private void InitializeForm()
+        private void ResetForm()
         {
-            fGame.GameStatus = Game.GameStatusEnum.InitialStatus;
-
             // Show only HIDE button, no description, instruction for starting game
             BtnGoToLocation.Visible = false;
             CboxExits.Visible = false;
@@ -34,17 +34,15 @@ namespace Ch7_HouseHideAndSeek
             TxtBoxGameStatus.Text = fGame.GameStatusString;
         }
 
-        private void GetFormReadyForGame()
+        private void UpdateFormGameInProgress()
         {
+            // Show or hide relevent controls
             LblCurrentLocation.Visible = true;
             TxtBoxCurrLocDescription.Visible = true;
             BtnGoToLocation.Visible = true;
             CboxExits.Visible = true;
             BtnHide.Visible = false;
-        }
 
-        private void UpdateFormGameInProgress()
-        {
             // Update text fields
             Location currentLoc = fGame.House.CurrentLocation;
 
@@ -73,26 +71,12 @@ namespace Ch7_HouseHideAndSeek
             TxtBoxGameStatus.Text = fGame.GameStatusString;
         }
 
-        private void UpdateFormGameOver()
-        {
-
-            LblCurrentLocation.Visible = false;
-            TxtBoxCurrLocDescription.Visible = false;
-            BtnGoToLocation.Visible = false;
-            BtnGoThroughDoor.Visible = false;
-            CboxExits.Visible = false;
-            BtnHide.Visible = true;
-        
-            // Game Status
-            TxtBoxGameStatus.Text = fGame.GameStatusString;
-        }
-
         private void UpdateForm()
         {
             if (fGame.GameStatus == Game.GameStatusEnum.GameStarted)
                 UpdateFormGameInProgress();
             else
-                UpdateFormGameOver();
+                ResetForm();
         }
 
         private void BtnGoToLocation_Click(object sender, EventArgs e)
@@ -136,7 +120,6 @@ namespace Ch7_HouseHideAndSeek
         private void BtnHide_Click(object sender, EventArgs e)
         {
             fGame.StartGame();
-            GetFormReadyForGame();
             UpdateForm();
         }
     }

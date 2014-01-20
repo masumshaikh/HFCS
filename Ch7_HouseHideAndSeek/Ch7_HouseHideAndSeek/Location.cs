@@ -50,5 +50,10 @@ namespace Ch7_HouseHideAndSeek
         {
             get { return fName; }
         }
+
+        public override string ToString()
+        {
+            return fName;
+        }
     }
 }

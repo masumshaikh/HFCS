@@ -59,25 +59,19 @@ namespace Ch7_HouseHideAndSeek
                     case GameStatusEnum.GameOverPlayerWon:
                         return "You found me in " + NumMoves + " moves!\n\rPress HIDE to begin.";
                     case GameStatusEnum.GameOverPlayerLost:
-                        return "You didn't find me!\n\rPress HIDE to begin.";
+                        return "You didn't find me!\n\rI was in the " + fOpponent.HidingPlace + "!!\n\rPress HIDE to begin.";
                 }
 
                 return "Woops unitialized game status string :-(";
             }
         }
         
-        public void MoveOpponent()
-        {
-            fOpponent.Move();
-            NumMoves++;
-        }
-
         public void StartGame()
         {
             GameStatus = GameStatusEnum.GameStarted;
             NumMoves = 0;
-            // for (int i = 1; i < 10; i++)
-            //    MoveOpponent();
+            for (int i = 1; i < 10; i++)
+                fOpponent.Move();
         }
 
         public bool CheckRoomAndUpdateGameStatus()
