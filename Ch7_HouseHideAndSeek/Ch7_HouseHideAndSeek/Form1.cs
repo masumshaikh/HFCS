@@ -21,6 +21,8 @@ namespace Ch7_HouseHideAndSeek
 
         private void InitializeForm()
         {
+            fGame.GameStatus = Game.GameStatusEnum.InitialStatus;
+
             // Show only HIDE button, no description, instruction for starting game
             BtnGoToLocation.Visible = false;
             CboxExits.Visible = false;
@@ -29,32 +31,34 @@ namespace Ch7_HouseHideAndSeek
             LblCurrentLocation.Visible = false;
             BtnHide.Visible = true;
             TxtBoxCurrLocDescription.Visible = false;
-            TxtBoxGameStatus.Text = fGame.GameStatus;
+            TxtBoxGameStatus.Text = fGame.GameStatusString;
         }
 
-        private void UpdateForm()
+        private void GetFormReadyForGame()
+        {
+            LblCurrentLocation.Visible = true;
+            TxtBoxCurrLocDescription.Visible = true;
+            BtnGoToLocation.Visible = true;
+            CboxExits.Visible = true;
+            BtnHide.Visible = false;
+        }
+
+        private void UpdateFormGameInProgress()
         {
             // Update text fields
             Location currentLoc = fGame.House.CurrentLocation;
 
             LblCurrentLocation.Text = "You are in the " + currentLoc.Name + ".";
-            LblCurrentLocation.Visible = true;
-
             TxtBoxCurrLocDescription.Text = currentLoc.Description;
-            TxtBoxCurrLocDescription.Visible = true;
-
-            // Reshow the goto location button
-            BtnGoToLocation.Visible = true;
 
             // Update combo box
             CboxExits.Items.Clear();
             for (int i = 0; i < currentLoc.Exits.Length; i++)
-            { 
+            {
                 CboxExits.Items.Add(currentLoc.Exits[i].Name);
             }
 
             CboxExits.SelectedIndex = 0;
-            CboxExits.Visible = true;
 
             // Show or hide "go through door" button
             BtnGoThroughDoor.Visible = fGame.House.CanSeeDoorFrom(currentLoc);
@@ -66,7 +70,29 @@ namespace Ch7_HouseHideAndSeek
                 BtnCheckHidingPlace.Text = "Check the hiding place: " + tempHidingPlace.HidingPlace;
 
             // Game Status
-            TxtBoxGameStatus.Text = fGame.GameStatus;
+            TxtBoxGameStatus.Text = fGame.GameStatusString;
+        }
+
+        private void UpdateFormGameOver()
+        {
+
+            LblCurrentLocation.Visible = false;
+            TxtBoxCurrLocDescription.Visible = false;
+            BtnGoToLocation.Visible = false;
+            BtnGoThroughDoor.Visible = false;
+            CboxExits.Visible = false;
+            BtnHide.Visible = true;
+        
+            // Game Status
+            TxtBoxGameStatus.Text = fGame.GameStatusString;
+        }
+
+        private void UpdateForm()
+        {
+            if (fGame.GameStatus == Game.GameStatusEnum.GameStarted)
+                UpdateFormGameInProgress();
+            else
+                UpdateFormGameOver();
         }
 
         private void BtnGoToLocation_Click(object sender, EventArgs e)
@@ -78,6 +104,8 @@ namespace Ch7_HouseHideAndSeek
             bool managedToMove = fGame.House.TryMoveToANewLocation(currentLoc, destination);
             if (!managedToMove)
                 MessageBox.Show("Couldn't move to that place from here!", "Woops!");
+            
+            // This line will change GameStatus to GameOverPlayerLost if NumMoves becomes equal to max moves allowed.
             fGame.NumMoves++;
             UpdateForm();
         }
@@ -91,22 +119,25 @@ namespace Ch7_HouseHideAndSeek
             bool managedToMove = fGame.House.TryMoveToANewLocation(currentLoc, destination);
             if (!managedToMove)
                 MessageBox.Show("Couldn't move to " + destination.Name + " from here!", "Woops!");
+            
+            // This line will change GameStatus to GameOverPlayerLost if NumMoves becomes equal to max moves allowed.
+            fGame.NumMoves++;
             UpdateForm();
         }
 
         private void BtnCheckHidingPlace_Click(object sender, EventArgs e)
         {
-            string msg = fGame.IsOpponentFound ? "You got me!" : "Try again!";
-            MessageBox.Show(msg);
-            fGame.StartGame();
-            InitializeForm();
-
+            bool hidingHere = fGame.CheckRoomAndUpdateGameStatus();
+            MessageBox.Show(hidingHere ? "yep I was here" : "try again");
+            fGame.NumMoves++;
+            UpdateForm();
         }
 
         private void BtnHide_Click(object sender, EventArgs e)
         {
             fGame.StartGame();
-            this.UpdateForm();
+            GetFormReadyForGame();
+            UpdateForm();
         }
     }
 }

@@ -9,45 +9,60 @@ namespace Ch7_HouseHideAndSeek
     {
         private readonly int fMaxMoves = 10;
         private Opponent fOpponent;
-        
+        private int fNumMoves;
+
         public Game()
         {
             House = new House();
             fOpponent = new Opponent(House.LivingRoom);
             NumMoves = 0;
-            GameStarted = false;
+            GameStatus = GameStatusEnum.InitialStatus;
         }
 
-        public House House { get; set; }
-        public int NumMoves { get; set; } // todo can make private?
+        public enum GameStatusEnum
+        {
+            InitialStatus,
+            GameStarted,
+            GameOverPlayerLost,
+            GameOverPlayerWon,
+        }
         
-        public bool IsOpponentFound
-        {
-            get { return fOpponent.CheckAmIHidingHere(House.CurrentLocation); } 
-        }
+        public House House { get; set; }
+        public GameStatusEnum GameStatus { get; set; }
 
-        public bool GameStarted { get; private set; }
-
-        public bool GameOver
-        {
-            get
-            { return GameStarted && (IsOpponentFound || NumMoves == fMaxMoves); }
-        }
-
-        public string GameStatus
+        public int NumMoves
         {
             get
             {
-                if (!GameStarted)
-                    return "Press Hide to begin.";
+                return fNumMoves;
+            }
 
-                else
+            set
+            {
+                fNumMoves = value;
+                if (fNumMoves == 10)
+                    GameStatus = GameStatusEnum.GameOverPlayerLost;
+            }
+        }
+        
+
+        public string GameStatusString
+        {
+            get
+            {
+                switch (GameStatus)
                 {
-                    if (GameOver)
-                        return IsOpponentFound ? "You found me in " + NumMoves + "moves :-(" : "You didn't find me - I win!";
-                    else
+                    case GameStatusEnum.InitialStatus:
+                        return "Press HIDE to begin.";
+                    case GameStatusEnum.GameStarted:
                         return "You have " + (fMaxMoves - NumMoves) + " moves left.";
+                    case GameStatusEnum.GameOverPlayerWon:
+                        return "You found me in " + NumMoves + " moves!\n\rPress HIDE to begin.";
+                    case GameStatusEnum.GameOverPlayerLost:
+                        return "You didn't find me!\n\rPress HIDE to begin.";
                 }
+
+                return "Woops unitialized game status string :-(";
             }
         }
         
@@ -59,10 +74,19 @@ namespace Ch7_HouseHideAndSeek
 
         public void StartGame()
         {
-            GameStarted = true;
+            GameStatus = GameStatusEnum.GameStarted;
             NumMoves = 0;
-            //for (int i = 1; i < 10; i++)
+            // for (int i = 1; i < 10; i++)
             //    MoveOpponent();
+        }
+
+        public bool CheckRoomAndUpdateGameStatus()
+        {
+            bool temp = fOpponent.CheckAmIHidingHere(House.CurrentLocation);
+            if (temp)
+                GameStatus = GameStatusEnum.GameOverPlayerWon;
+
+            return temp;
         }
     }
 }
