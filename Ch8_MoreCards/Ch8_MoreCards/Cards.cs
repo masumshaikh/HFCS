@@ -39,6 +39,30 @@ namespace Ch8_MoreCards
             Suit = suit;
         }
 
+        public Card(string s)
+        {
+            string[] wordArray = s.Split(' ');
+            if (wordArray.Length != 4)
+                throw new Exception("can't make card from that string.");
+            else
+            {
+                string tryValue = wordArray[1];
+                string trySuit = wordArray[3];
+
+                Values value;
+                Suits suit;
+                
+                bool gotValue = Enum.TryParse(tryValue, true, out value);
+                bool gotSuit = Enum.TryParse(trySuit, true, out suit);
+
+                if (gotValue && gotSuit)
+                {
+                    Value = value;
+                    Suit = suit;
+                }
+            }
+        }
+
         public Values Value { get; set; }
         public Suits Suit { get; set; }
 

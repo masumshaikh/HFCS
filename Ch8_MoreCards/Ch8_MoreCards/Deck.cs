@@ -48,12 +48,23 @@ namespace Ch8_MoreCards
             var iter = this.GetEnumerator();
             string outString = string.Empty;
 
-            while(iter.MoveNext())
+            while (iter.MoveNext())
             {
                 outString += iter.Current.ToString() + "\n";
             }
 
             return outString;
+        }
+
+        public void Shuffle()
+        {
+            for (int i = this.Count - 1; i > 0; i--)
+            {
+                int j = fRandom.Next(i + 1);
+                Card toMove = this[j];
+                this[j] = this[i];
+                this[i] = toMove;
+            }
         }
     }
 }
