@@ -16,10 +16,16 @@ namespace Lab2TheQuest
         public Form1()
         {
             InitializeComponent();
+
+            Rectangle tempRect = new Rectangle(76, 57, 449, 187);
+            fGame = new Game(tempRect);
+            UpdateCharacters();
         }
 
         private void UpdateCharacters()
         {
+            PicBoxPlayer.Location = fGame.PlayerLocation;
+            PicBoxPlayer.Visible = true;
         }
     }
 }

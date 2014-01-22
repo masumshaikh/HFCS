@@ -7,7 +7,7 @@ namespace Lab2TheQuest
 {
     public class Enemy
     {
-        public void Move()
+        public void Move(Random rand)
         {
         }
     }
