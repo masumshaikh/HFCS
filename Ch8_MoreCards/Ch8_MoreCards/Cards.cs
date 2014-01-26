@@ -89,7 +89,7 @@ namespace Ch8_MoreCards
 
         public bool Equals(Card other)
         {
-            return (this.CompareTo(other) == 0) ? true : false;
+            return this.CompareTo(other) == 0;
         }
     }
 }
