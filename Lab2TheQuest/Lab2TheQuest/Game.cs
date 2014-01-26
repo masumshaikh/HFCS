@@ -42,7 +42,7 @@ namespace Lab2TheQuest
 
         public void Move(Direction playerMoveDirection)
         {
-            fPlayer.Move(playerMoveDirection);
+            fPlayer.Move(playerMoveDirection, Boundaries);
             foreach (var enemy in fEnemies)
             {
                 enemy.Move(fRandom);
@@ -53,10 +53,12 @@ namespace Lab2TheQuest
         {
             fPlayer.Equip(weapon);
         }
+
         public bool CheckPlayerInventory(WeaponName weapon)
         {
-            return fPlayer.Weapons.Contains(weapon);
+            return fPlayer.InventoryWeaponNames.Contains(weapon);
         }
+
         public void HitPlayer(int maxDamage, Random random)
         {
             fPlayer.Hit(maxDamage, random);

@@ -8,5 +8,10 @@ namespace Lab2TheQuest
 {
     public class Weapon
     {
+        public Game.WeaponName Name { get; private set; }
+
+        public Weapon()
+        {
+        }
     }
 }

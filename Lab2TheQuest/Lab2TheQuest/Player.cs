@@ -6,38 +6,37 @@ using System.Drawing;
 
 namespace Lab2TheQuest
 {
-    public class Player
+    public class Player : Mover
     {
-        public Player(Point initLocation)
-        {
-            Point tempPoint = new Point();
-            tempPoint.X = initLocation.X;
-            tempPoint.Y = initLocation.Y;
+        private const int InitHealth = 10;
 
-            WhereAmI = tempPoint;
-        }
+        private Weapon fEquippedWeapon;
+        private List<Weapon> fInventory;
         
-        public Point WhereAmI { get; set; }
-        public int HitPoints { get; set; }
-        public List<Game.WeaponName> Weapons { get; set; }
-
-        public void Move(Game.Direction playerMoveDirection)
+        public Player(Point p) : base(p)
         {
+            HitPoints = InitHealth;
         }
 
-        internal void Equip(Game.WeaponName weapon)
+        public int HitPoints { get; private set; }
+        public List<Game.WeaponName> InventoryWeaponNames { get; private set; }
+
+        internal void Equip(Game.WeaponName weaponName)
         {
-            throw new NotImplementedException();
+            foreach (Weapon w in fInventory)
+            {
+                if (w.Name == weaponName) fEquippedWeapon = w;
+            }
         }
 
         internal void Hit(int maxDamage, Random random)
         {
-            throw new NotImplementedException();
+            HitPoints -= random.Next(1, maxDamage);
         }
 
         internal void IncreaseHealth(int health, Random random)
         {
-            throw new NotImplementedException();
+            HitPoints += random.Next(1, health);
         }
 
         internal void Attack(Game.Direction direction, Random random)
