@@ -12,14 +12,14 @@ namespace Lab2TheQuest
         
         public Mover(Point p)
         {
-            WhereAmI = p;
+            this.Location = p;
         }
 
-        public Point WhereAmI { get; protected set; }
+        public Point Location { get; protected set; }
     
-        public Point Move(Game.Direction direction, Rectangle boundaries)
+        public void Move(Game.Direction direction, Rectangle boundaries)
         {
-            Point newLocation = WhereAmI;
+            Point newLocation = this.Location;
             switch (direction)
             {
                 case Game.Direction.Up:
@@ -38,11 +38,14 @@ namespace Lab2TheQuest
                     if (newLocation.X + MoveInterval <= boundaries.Right)
                         newLocation.X += MoveInterval;
                     break;
-                default:
-                    break;
             }
 
-            return newLocation;
+            this.Location = newLocation;
+        }
+
+        public bool Nearby(Point locationToCheck, int distance)
+        {
+            return (Math.Abs(Location.X - locationToCheck.X) < distance) && (Math.Abs(Location.Y - locationToCheck.Y) < distance);
         }
     }
 }

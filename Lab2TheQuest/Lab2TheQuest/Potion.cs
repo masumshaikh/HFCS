@@ -6,13 +6,14 @@ using System.Drawing;
 
 namespace Lab2TheQuest
 {
-    public class Enemy : Mover
-    {
-        public Enemy(Point p) :base(p)
-        {
-        }
+    public interface IPotion
+    { 
+    }
 
-        public void Move(Random rand)
+    public class Potion : Weapon, IPotion
+    {
+        public Potion(Point p)
+            : base(p)
         {
         }
     }

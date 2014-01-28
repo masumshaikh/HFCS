@@ -10,7 +10,7 @@ namespace Lab2TheQuest
     {
         private Player fPlayer;
         private List<Enemy> fEnemies = new List<Enemy>();
-        private Weapon fWeaponInRoom = new Weapon();
+        private Weapon fWeaponInRoom = new Weapon(new Point(10, 20));
         private Random fRandom = new Random();
 
         public Game(Rectangle boundaries)
@@ -36,7 +36,7 @@ namespace Lab2TheQuest
             Mace,
         }
 
-        public Point PlayerLocation { get { return fPlayer.WhereAmI; } }
+        public Point PlayerLocation { get { return fPlayer.Location; } }
         public int PlayerHitPoints { get { return fPlayer.HitPoints; } }
         public Rectangle Boundaries { get; private set; }
 
@@ -47,6 +47,12 @@ namespace Lab2TheQuest
             {
                 enemy.Move(fRandom);
             }
+
+            if (fPlayer.Nearby(fWeaponInRoom.Location, 10))
+            {
+                fPlayer.PickUpWeapon(fWeaponInRoom);
+            }
+
         }
 
         public void Equip(WeaponName weapon)

@@ -54,6 +54,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Mover.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Potion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Weapon.cs" />
