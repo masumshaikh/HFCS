@@ -9,15 +9,21 @@ namespace Lab2TheQuest
     public abstract class Mover
     {
         private const int MoveInterval = 10;
-        
-        public Mover(Point p)
+
+        protected Mover(Point p)
         {
             this.Location = p;
         }
 
-        public Point Location { get; protected set; }
+        protected Mover(Rectangle boundaries, Random rnd)
+        {
+            var p = new Point { X = rnd.Next(boundaries.Right - boundaries.Left), Y = rnd.Next(boundaries.Bottom - boundaries.Top) };
+            this.Location = p;
+        }
+
+        public Point Location { get; set; }
     
-        public void Move(Game.Direction direction, Rectangle boundaries)
+        public virtual void Move(Game.Direction direction, Rectangle boundaries)
         {
             Point newLocation = this.Location;
             switch (direction)

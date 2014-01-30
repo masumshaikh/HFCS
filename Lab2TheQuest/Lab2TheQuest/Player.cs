@@ -45,9 +45,10 @@ namespace Lab2TheQuest
             }
         }
 
-        public void Hit(int maxDamage, Random random)
+        public void TakeHit(int maxDamage, Random random)
         {
             HitPoints -= random.Next(1, maxDamage);
+            if (HitPoints < 0) HitPoints = 0;
         }
 
         public void IncreaseHealth(int health, Random random)
@@ -63,9 +64,9 @@ namespace Lab2TheQuest
             {
                 fEquippedWeapon.Attack();
                 if (fEquippedWeapon is IPotion)
-                    // might to make sure some gui stuff gets done after this.
-                    fEquippedWeapon = null;
 
+                    // might need to make sure some gui stuff gets done after this.
+                    fEquippedWeapon = null;
             }
         }
 

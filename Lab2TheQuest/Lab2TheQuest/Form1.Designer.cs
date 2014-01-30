@@ -56,14 +56,14 @@
             this.BtnMoveDown = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.PicBoxPlayer = new System.Windows.Forms.PictureBox();
-            this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.PicBoxGhoul = new System.Windows.Forms.PictureBox();
+            this.PicBoxPotionRed = new System.Windows.Forms.PictureBox();
+            this.PicBoxPotionBlue = new System.Windows.Forms.PictureBox();
+            this.PicBoxGhost = new System.Windows.Forms.PictureBox();
+            this.PicBoxBat = new System.Windows.Forms.PictureBox();
+            this.PicBoxSword = new System.Windows.Forms.PictureBox();
+            this.PicBoxBow = new System.Windows.Forms.PictureBox();
+            this.PicBoxMace = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -73,14 +73,14 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicBoxPlayer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxGhoul)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxPotionRed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxPotionBlue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxGhost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxBat)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxSword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxBow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxMace)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -331,6 +331,7 @@
             this.BtnMoveUp.TabIndex = 0;
             this.BtnMoveUp.Text = "Up";
             this.BtnMoveUp.UseVisualStyleBackColor = true;
+            this.BtnMoveUp.Click += new System.EventHandler(this.BtnMoveUp_Click);
             // 
             // BtnMoveLeft
             // 
@@ -340,6 +341,7 @@
             this.BtnMoveLeft.TabIndex = 1;
             this.BtnMoveLeft.Text = "Left";
             this.BtnMoveLeft.UseVisualStyleBackColor = true;
+            this.BtnMoveLeft.Click += new System.EventHandler(this.BtnMoveLeft_Click);
             // 
             // BtnMoveRight
             // 
@@ -349,6 +351,7 @@
             this.BtnMoveRight.TabIndex = 2;
             this.BtnMoveRight.Text = "Right";
             this.BtnMoveRight.UseVisualStyleBackColor = true;
+            this.BtnMoveRight.Click += new System.EventHandler(this.BtnMoveRight_Click);
             // 
             // BtnMoveDown
             // 
@@ -358,6 +361,7 @@
             this.BtnMoveDown.TabIndex = 3;
             this.BtnMoveDown.Text = "Down";
             this.BtnMoveDown.UseVisualStyleBackColor = true;
+            this.BtnMoveDown.Click += new System.EventHandler(this.BtnMoveDown_Click);
             // 
             // label2
             // 
@@ -381,93 +385,93 @@
             this.PicBoxPlayer.TabIndex = 18;
             this.PicBoxPlayer.TabStop = false;
             // 
-            // pictureBox14
+            // PicBoxGhoul
             // 
-            this.pictureBox14.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox14.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox14.Image")));
-            this.pictureBox14.Location = new System.Drawing.Point(192, 93);
-            this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox14.TabIndex = 25;
-            this.pictureBox14.TabStop = false;
+            this.PicBoxGhoul.BackColor = System.Drawing.Color.Transparent;
+            this.PicBoxGhoul.Image = ((System.Drawing.Image)(resources.GetObject("PicBoxGhoul.Image")));
+            this.PicBoxGhoul.Location = new System.Drawing.Point(192, 93);
+            this.PicBoxGhoul.Name = "PicBoxGhoul";
+            this.PicBoxGhoul.Size = new System.Drawing.Size(30, 30);
+            this.PicBoxGhoul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicBoxGhoul.TabIndex = 25;
+            this.PicBoxGhoul.TabStop = false;
             // 
-            // pictureBox12
+            // PicBoxPotionRed
             // 
-            this.pictureBox12.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox12.Image")));
-            this.pictureBox12.Location = new System.Drawing.Point(397, 93);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox12.TabIndex = 23;
-            this.pictureBox12.TabStop = false;
+            this.PicBoxPotionRed.BackColor = System.Drawing.Color.Transparent;
+            this.PicBoxPotionRed.Image = ((System.Drawing.Image)(resources.GetObject("PicBoxPotionRed.Image")));
+            this.PicBoxPotionRed.Location = new System.Drawing.Point(397, 93);
+            this.PicBoxPotionRed.Name = "PicBoxPotionRed";
+            this.PicBoxPotionRed.Size = new System.Drawing.Size(30, 30);
+            this.PicBoxPotionRed.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicBoxPotionRed.TabIndex = 23;
+            this.PicBoxPotionRed.TabStop = false;
             // 
-            // pictureBox11
+            // PicBoxPotionBlue
             // 
-            this.pictureBox11.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
-            this.pictureBox11.Location = new System.Drawing.Point(349, 93);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox11.TabIndex = 22;
-            this.pictureBox11.TabStop = false;
+            this.PicBoxPotionBlue.BackColor = System.Drawing.Color.Transparent;
+            this.PicBoxPotionBlue.Image = ((System.Drawing.Image)(resources.GetObject("PicBoxPotionBlue.Image")));
+            this.PicBoxPotionBlue.Location = new System.Drawing.Point(349, 93);
+            this.PicBoxPotionBlue.Name = "PicBoxPotionBlue";
+            this.PicBoxPotionBlue.Size = new System.Drawing.Size(30, 30);
+            this.PicBoxPotionBlue.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicBoxPotionBlue.TabIndex = 22;
+            this.PicBoxPotionBlue.TabStop = false;
             // 
-            // pictureBox9
+            // PicBoxGhost
             // 
-            this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
-            this.pictureBox9.Location = new System.Drawing.Point(240, 93);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox9.TabIndex = 20;
-            this.pictureBox9.TabStop = false;
+            this.PicBoxGhost.BackColor = System.Drawing.Color.Transparent;
+            this.PicBoxGhost.Image = ((System.Drawing.Image)(resources.GetObject("PicBoxGhost.Image")));
+            this.PicBoxGhost.Location = new System.Drawing.Point(240, 93);
+            this.PicBoxGhost.Name = "PicBoxGhost";
+            this.PicBoxGhost.Size = new System.Drawing.Size(30, 30);
+            this.PicBoxGhost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicBoxGhost.TabIndex = 20;
+            this.PicBoxGhost.TabStop = false;
             // 
-            // pictureBox8
+            // PicBoxBat
             // 
-            this.pictureBox8.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(144, 93);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox8.TabIndex = 19;
-            this.pictureBox8.TabStop = false;
+            this.PicBoxBat.BackColor = System.Drawing.Color.Transparent;
+            this.PicBoxBat.Image = ((System.Drawing.Image)(resources.GetObject("PicBoxBat.Image")));
+            this.PicBoxBat.Location = new System.Drawing.Point(144, 93);
+            this.PicBoxBat.Name = "PicBoxBat";
+            this.PicBoxBat.Size = new System.Drawing.Size(30, 30);
+            this.PicBoxBat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicBoxBat.TabIndex = 19;
+            this.PicBoxBat.TabStop = false;
             // 
-            // pictureBox6
+            // PicBoxSword
             // 
-            this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(98, 93);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 17;
-            this.pictureBox6.TabStop = false;
+            this.PicBoxSword.BackColor = System.Drawing.Color.Transparent;
+            this.PicBoxSword.Image = ((System.Drawing.Image)(resources.GetObject("PicBoxSword.Image")));
+            this.PicBoxSword.Location = new System.Drawing.Point(98, 93);
+            this.PicBoxSword.Name = "PicBoxSword";
+            this.PicBoxSword.Size = new System.Drawing.Size(30, 30);
+            this.PicBoxSword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicBoxSword.TabIndex = 17;
+            this.PicBoxSword.TabStop = false;
             // 
-            // pictureBox10
+            // PicBoxBow
             // 
-            this.pictureBox10.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
-            this.pictureBox10.Location = new System.Drawing.Point(295, 93);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox10.TabIndex = 21;
-            this.pictureBox10.TabStop = false;
+            this.PicBoxBow.BackColor = System.Drawing.Color.Transparent;
+            this.PicBoxBow.Image = ((System.Drawing.Image)(resources.GetObject("PicBoxBow.Image")));
+            this.PicBoxBow.Location = new System.Drawing.Point(295, 93);
+            this.PicBoxBow.Name = "PicBoxBow";
+            this.PicBoxBow.Size = new System.Drawing.Size(30, 30);
+            this.PicBoxBow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicBoxBow.TabIndex = 21;
+            this.PicBoxBow.TabStop = false;
             // 
-            // pictureBox13
+            // PicBoxMace
             // 
-            this.pictureBox13.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
-            this.pictureBox13.Location = new System.Drawing.Point(442, 93);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox13.TabIndex = 24;
-            this.pictureBox13.TabStop = false;
+            this.PicBoxMace.BackColor = System.Drawing.Color.Transparent;
+            this.PicBoxMace.Image = ((System.Drawing.Image)(resources.GetObject("PicBoxMace.Image")));
+            this.PicBoxMace.Location = new System.Drawing.Point(442, 93);
+            this.PicBoxMace.Name = "PicBoxMace";
+            this.PicBoxMace.Size = new System.Drawing.Size(30, 30);
+            this.PicBoxMace.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicBoxMace.TabIndex = 24;
+            this.PicBoxMace.TabStop = false;
             // 
             // Form1
             // 
@@ -477,14 +481,14 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(815, 401);
             this.Controls.Add(this.PicBoxPlayer);
-            this.Controls.Add(this.pictureBox14);
-            this.Controls.Add(this.pictureBox12);
-            this.Controls.Add(this.pictureBox11);
-            this.Controls.Add(this.pictureBox9);
-            this.Controls.Add(this.pictureBox8);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox10);
-            this.Controls.Add(this.pictureBox13);
+            this.Controls.Add(this.PicBoxGhoul);
+            this.Controls.Add(this.PicBoxPotionRed);
+            this.Controls.Add(this.PicBoxPotionBlue);
+            this.Controls.Add(this.PicBoxGhost);
+            this.Controls.Add(this.PicBoxBat);
+            this.Controls.Add(this.PicBoxSword);
+            this.Controls.Add(this.PicBoxBow);
+            this.Controls.Add(this.PicBoxMace);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -507,14 +511,14 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicBoxPlayer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxGhoul)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxPotionRed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxPotionBlue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxGhost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxBat)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxSword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxBow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicBoxMace)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -548,14 +552,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button BtnAttackRight;
         private System.Windows.Forms.PictureBox PicBoxPlayer;
-        private System.Windows.Forms.PictureBox pictureBox14;
-        private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.PictureBox pictureBox13;
+        private System.Windows.Forms.PictureBox PicBoxGhoul;
+        private System.Windows.Forms.PictureBox PicBoxPotionRed;
+        private System.Windows.Forms.PictureBox PicBoxPotionBlue;
+        private System.Windows.Forms.PictureBox PicBoxGhost;
+        private System.Windows.Forms.PictureBox PicBoxBat;
+        private System.Windows.Forms.PictureBox PicBoxSword;
+        private System.Windows.Forms.PictureBox PicBoxBow;
+        private System.Windows.Forms.PictureBox PicBoxMace;
 
     }
 }
