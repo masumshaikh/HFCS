@@ -25,6 +25,7 @@ namespace Lab2TheQuest
         private void UpdateCharacters()
         {
             UpdatePlayer();
+            UpdateWeapons();
             UpdateEnemies();
         }
 
@@ -98,6 +99,10 @@ namespace Lab2TheQuest
             this.PicBoxPlayer.Location = this.fGame.PlayerLocation;
             this.PicBoxPlayer.Visible = true;
             this.LblPlayerHitPoints.Text = this.fGame.PlayerHitPoints.ToString();
+        }
+
+        private void UpdateWeapons()
+        {
         }
 
         private void BtnMoveRight_Click(object sender, EventArgs e)

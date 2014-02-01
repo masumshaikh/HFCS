@@ -44,6 +44,18 @@ namespace Lab2TheQuest
             player.TakeHit(MaxDamage, rnd);
         }
 
+        public void TakeHit(int damage, Random rnd)
+        {
+            HitPoints -= rnd.Next(1, damage);
+            if (HitPoints < 0) HitPoints = 0;
+        }
+
+        public bool Nearby(Point locationToCheck, int distance, Game.Direction direction)
+        {
+            return true;
+        }
+
+
         public abstract void Move(Random rand, Rectangle boundaries, Point playerLocation);
     }
 }

@@ -10,7 +10,6 @@ namespace Lab2TheQuest
     {
         private Player fPlayer;
         private List<Enemy> fEnemies;
-        private Weapon fWeaponInRoom = new Weapon(new Point(10, 20));
         private Random fRandom = new Random();
         
         public Game(Rectangle boundaries)
@@ -23,6 +22,9 @@ namespace Lab2TheQuest
             Ghoul = new Ghoul(boundaries, fRandom);
             fEnemies = new List<Enemy> { Bat, Ghost, Ghoul };
             Enemies = fEnemies;
+
+            var Sword = new Sword(boundaries, fRandom);
+            WeaponInRoom = Sword;
         }
 
         public enum Direction
@@ -49,20 +51,26 @@ namespace Lab2TheQuest
         public Bat Bat { get; set; }
         public Ghost Ghost { get; set; }
         public Ghoul Ghoul { get; set; }
+        public Weapon WeaponInRoom { get; set; }
+
+        public void MovePlayer(Direction playerMoveDirection)
+        {
+            fPlayer.Move(playerMoveDirection, Boundaries);
+        }
 
         public void MoveAllObjects(Direction playerMoveDirection)
         {
-            fPlayer.Move(playerMoveDirection, Boundaries);
+            MovePlayer(playerMoveDirection);
+
+            if (fPlayer.Nearby(WeaponInRoom.Location, 10))
+                fPlayer.PickUpWeapon(WeaponInRoom);
+
             foreach (var enemy in fEnemies)
             {
                 enemy.Move(fRandom, Boundaries, PlayerLocation);
                 if (enemy.Nearby(fPlayer.Location, 10))
                     enemy.HitPlayer(fPlayer, fRandom);
             }
-
-            if (fPlayer.Nearby(fWeaponInRoom.Location, 10))
-                fPlayer.PickUpWeapon(fWeaponInRoom);
-
         }
 
         public void Equip(WeaponName weapon)

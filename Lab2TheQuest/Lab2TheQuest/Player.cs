@@ -62,7 +62,7 @@ namespace Lab2TheQuest
                 return;
             else
             {
-                fEquippedWeapon.Attack();
+                fEquippedWeapon.Attack(direction, random);
                 if (fEquippedWeapon is IPotion)
 
                     // might need to make sure some gui stuff gets done after this.
@@ -73,6 +73,7 @@ namespace Lab2TheQuest
         public void PickUpWeapon(Weapon weaponToPickUp)
         {
             this.Inventory.Add(weaponToPickUp);
+            weaponToPickUp.BePickedUp();
             if (Inventory.Count == 1)
                 this.Equip(weaponToPickUp.Name);
         }
