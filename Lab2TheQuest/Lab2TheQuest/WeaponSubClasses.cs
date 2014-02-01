@@ -27,4 +27,29 @@ namespace Lab2TheQuest
             throw new NotImplementedException();
         }
     }
+
+    public class PotionBlue : Weapon, IPotion
+    {
+        protected PotionBlue(Point p)
+            : base(p)
+        {
+        }
+
+        public PotionBlue(Rectangle boundaries, Random rnd)
+            : base(boundaries, rnd)
+        {
+        }
+
+        public bool IsUsed { get; set; }
+
+        public override Game.WeaponName Name
+        {
+            get { return Game.WeaponName.Sword; }
+        }
+
+        public override void Attack(Game.Direction direction, Random rnd)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

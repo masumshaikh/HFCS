@@ -11,20 +11,14 @@ namespace Lab2TheQuest
         private Player fPlayer;
         private List<Enemy> fEnemies;
         private Random fRandom = new Random();
+        private int fLevel = 0;
         
         public Game(Rectangle boundaries)
         {
             Boundaries = boundaries;
             fPlayer = new Player(new Point(boundaries.Left + 10, boundaries.Top + 70));
 
-            Bat = new Bat(boundaries, fRandom);
-            Ghost = new Ghost(boundaries, fRandom);
-            Ghoul = new Ghoul(boundaries, fRandom);
-            fEnemies = new List<Enemy> { Bat, Ghost, Ghoul };
-            Enemies = fEnemies;
-
-            var Sword = new Sword(boundaries, fRandom);
-            WeaponInRoom = Sword;
+            this.NewLevel();
         }
 
         public enum Direction
@@ -38,9 +32,9 @@ namespace Lab2TheQuest
         public enum WeaponName
         {
             Sword,
-            BluePotion,
+            PotionBlue,
             Bow,
-            RedPotion,
+            PotionRed,
             Mace,
         }
 
@@ -48,10 +42,10 @@ namespace Lab2TheQuest
         public int PlayerHitPoints { get { return fPlayer.HitPoints; } }
         public Rectangle Boundaries { get; private set; }
         public List<Enemy> Enemies { get; private set; }
-        public Bat Bat { get; set; }
-        public Ghost Ghost { get; set; }
-        public Ghoul Ghoul { get; set; }
-        public Weapon WeaponInRoom { get; set; }
+        public Bat Bat { get; private set; }
+        public Ghost Ghost { get; private set; }
+        public Ghoul Ghoul { get; private set; }
+        public Weapon WeaponInRoom { get; private set; }
 
         public void MovePlayer(Direction playerMoveDirection)
         {
@@ -95,12 +89,28 @@ namespace Lab2TheQuest
                 enemy.Move(fRandom, Boundaries, PlayerLocation);
         }
 
-        private Point GetRandomLocation(Random random)
+        public void NewLevel()
         {
-            return new Point
-                (
-                   Boundaries.Left + random.Next(Boundaries.Right / 10 - Boundaries.Left / 10) * 10,
-                   Boundaries.Top + random.Next(Boundaries.Bottom / 10 - Boundaries.Top / 10) * 10 );
+            fLevel++;
+            switch (fLevel)
+            {
+                case 1:
+                    Bat = new Bat(this.Boundaries, fRandom);
+                    fEnemies = new List<Enemy> { Bat };
+                    Enemies = fEnemies;
+
+                    var Sword = new Sword(this.Boundaries, fRandom);
+                    WeaponInRoom = Sword;
+                    break;
+                case 2:
+                    Ghost = new Ghost(this.Boundaries, fRandom);
+                    fEnemies = new List<Enemy> { Bat };
+                    Enemies = fEnemies;
+
+                    var PotionBlue = new PotionBlue(this.Boundaries, fRandom);
+                    WeaponInRoom = PotionBlue;
+                    break;
+            }
         }
     }
 }

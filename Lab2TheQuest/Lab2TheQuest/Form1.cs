@@ -12,7 +12,8 @@ namespace Lab2TheQuest
     public partial class Form1 : Form
     {
         private Game fGame;
-
+        private PictureBox PicBoxWeaponInRoom;
+        
         public Form1()
         {
             InitializeComponent();
@@ -103,8 +104,12 @@ namespace Lab2TheQuest
 
         private void UpdateWeapons()
         {
+
+            if (fGame.WeaponInRoom.IsPickedUp)
+                PicBoxWeaponInRoom.Visible = true;
         }
 
+        #region Move Buttons
         private void BtnMoveRight_Click(object sender, EventArgs e)
         {
             fGame.MoveAllObjects(Game.Direction.Right);
@@ -128,5 +133,6 @@ namespace Lab2TheQuest
             fGame.MoveAllObjects(Game.Direction.Up);
             UpdateCharacters();
         }
+        #endregion
     }
 }
