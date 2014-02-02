@@ -18,7 +18,7 @@ namespace Lab2TheQuest
             Boundaries = boundaries;
             fPlayer = new Player(new Point(boundaries.Left + 10, boundaries.Top + 70));
 
-            this.NewLevel();
+            NewLevel();
         }
 
         public enum Direction
@@ -102,14 +102,24 @@ namespace Lab2TheQuest
                     var Sword = new Sword(this.Boundaries, fRandom);
                     WeaponInRoom = Sword;
                     break;
+
                 case 2:
                     Ghost = new Ghost(this.Boundaries, fRandom);
-                    fEnemies = new List<Enemy> { Bat };
+                    fEnemies = new List<Enemy> { Ghost };
                     Enemies = fEnemies;
 
                     var PotionBlue = new PotionBlue(this.Boundaries, fRandom);
                     WeaponInRoom = PotionBlue;
                     break;
+
+                case 3:
+                    Bat = new Bat(this.Boundaries, fRandom);
+                    Ghost = new Ghost(this.Boundaries, fRandom);
+                    fEnemies = new List<Enemy> { Bat, Ghost };
+                    Enemies = fEnemies;
+
+                    break;
+
             }
         }
     }
