@@ -10,7 +10,7 @@ namespace Lab2TheQuest
     {
         private const int InitHealth = 10;
         private Weapon fEquippedWeapon;
-        private List<Weapon> fInventory; 
+        private List<Weapon> fInventory = new List<Weapon>() { }; 
         
         public Player(Point p) : base(p)
         {

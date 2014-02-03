@@ -138,7 +138,7 @@
         llokeMNXJglINMrW+RAZlhEZlo+lyl/LLcOoNlQ7ZAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PicBoxInvPotionBlue.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAANbY1E9YMgAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAaTSURBVGhD7ZptTJVlGMf5YEylUtN8i+ELCcrLOXAO
@@ -172,7 +172,7 @@
         tIeTCYUoWgWjqv+HGhjE5AVKG65/rBHFBxFRfPA4HfE/nbvlHSQUp+4AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="pictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PicBoxInvBow.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAANbY1E9YMgAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAN/SURBVGhD3ZlLa1NBGIYDXoO09QIpamylSqTWVihS
@@ -193,7 +193,7 @@
         FpGUwFrC2Ij9ylQUpFhGpFhGpFg+Nip/AfeEvfqlYZh2AAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pictureBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PicBoxInvPotionRed.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAANbY1E9YMgAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAaISURBVGhD7Zp7TJV1GMdZLqZo3i1QUiRFMRHjIqCo
@@ -227,7 +227,7 @@
         Zgpwre1o46v/QdGIxrsR0Xj3cdrvb2bja3DFIVQVAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pictureBox5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PicBoxInvMace.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAANbY1E9YMgAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAARBSURBVGhD3ZjLahRBFIYHFDGRGMUhQYkTiJDEW0KC

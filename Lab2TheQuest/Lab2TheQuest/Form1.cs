@@ -15,6 +15,7 @@ namespace Lab2TheQuest
         private PictureBox fPicBoxWeaponInRoom;
         private List<PictureBox> fPicBoxesWeapons;
         private List<PictureBox> fPicBoxesEnemies;
+        private List<PictureBox> fPicBoxesInventory;
 
         public Form1()
         {
@@ -23,7 +24,9 @@ namespace Lab2TheQuest
             var boundaries = new Rectangle(78, 57, 420, 155);
             fGame = new Game(boundaries);
             fPicBoxesWeapons = new List<PictureBox>() { PicBoxBow, PicBoxPotionBlue, PicBoxSword, PicBoxMace, PicBoxPotionRed };
-            fPicBoxesEnemies = new List<PictureBox>() { PicBoxBat, PicBoxGhost, PicBoxGhoul }; 
+            fPicBoxesEnemies = new List<PictureBox>() { PicBoxBat, PicBoxGhost, PicBoxGhoul };
+            fPicBoxesInventory = new List<PictureBox>() { PicBoxInvBow, PicBoxInvPotionBlue, PicBoxInvSword, PicBoxInvMace, PicBoxInvPotionRed }; 
+
             UpdateCharacters();
         }
 
@@ -135,6 +138,10 @@ namespace Lab2TheQuest
                 fPicBoxWeaponInRoom.Location = fGame.WeaponInRoom.Location;
                 fPicBoxWeaponInRoom.Visible = true;
             }
+        }
+
+        private void UpdateInventory()
+        {
         }
 
         #region Move Buttons
