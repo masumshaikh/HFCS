@@ -31,6 +31,8 @@ namespace Lab2TheQuest
             IsPickedUp = true;
         }
 
+        public abstract void Attack(Game.Direction direction, Random rnd);
+
         protected bool DamageEnemy(Game game, Point playerLocation,
                                     Game.Direction direction, int distance, int damage, 
                                     Random rnd)
@@ -45,7 +47,5 @@ namespace Lab2TheQuest
             game.MovePlayer(direction);
             return false;
         }
-
-        public abstract void Attack(Game.Direction direction, Random rnd);
     }
 }
