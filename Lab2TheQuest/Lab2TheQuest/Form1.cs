@@ -14,6 +14,7 @@ namespace Lab2TheQuest
         private Game fGame;
         private PictureBox fPicBoxWeaponInRoom;
         private List<PictureBox> fPicBoxesWeapons;
+        private List<PictureBox> fPicBoxesEnemies;
 
         public Form1()
         {
@@ -22,6 +23,7 @@ namespace Lab2TheQuest
             var boundaries = new Rectangle(78, 57, 420, 155);
             fGame = new Game(boundaries);
             fPicBoxesWeapons = new List<PictureBox>() { PicBoxBow, PicBoxPotionBlue, PicBoxSword, PicBoxMace, PicBoxPotionRed };
+            fPicBoxesEnemies = new List<PictureBox>() { PicBoxBat, PicBoxGhost, PicBoxGhoul }; 
             UpdateCharacters();
         }
 
@@ -38,6 +40,9 @@ namespace Lab2TheQuest
             bool showGhost = false;
             bool showGhoul = false;
             int enemiesShown = 0;
+
+            foreach (PictureBox pbox in fPicBoxesEnemies)
+                pbox.Visible = false;
 
             foreach (var enemy in fGame.Enemies)
             {
@@ -80,21 +85,31 @@ namespace Lab2TheQuest
                     }
                 }
             }
-
-            if (!(fGame.Bat == null)) PicBoxBat.Location = fGame.Bat.Location;
-            if (!(fGame.Ghost == null)) PicBoxGhost.Location = fGame.Ghost.Location;
-            if (!(fGame.Ghoul == null)) PicBoxGhoul.Location = fGame.Ghoul.Location;
-            
+                        
             if (showBat)
-                this.PicBoxBat.Visible = true;
+                PicBoxBat.Visible = true;
             if (showGhost)
-                this.PicBoxGhost.Visible = true;
+                PicBoxGhost.Visible = true;
             if (showGhoul)
-                this.PicBoxGhoul.Visible = true;
+                PicBoxGhoul.Visible = true;
 
-            if (!(fGame.Bat == null)) LblBatHitPoints.Text = fGame.Bat.HitPoints.ToString();
-            if (!(fGame.Ghost == null)) LblGhostHitPoints.Text = fGame.Ghost.HitPoints.ToString();
-            if (!(fGame.Ghoul == null)) LblGhoulHitPoints.Text = fGame.Ghoul.HitPoints.ToString();
+            if (!(fGame.Bat == null))
+            {
+                PicBoxBat.Location = fGame.Bat.Location;
+                LblBatHitPoints.Text = fGame.Bat.HitPoints.ToString();
+            }
+
+            if (!(fGame.Ghost == null))
+            {
+                PicBoxGhost.Location = fGame.Ghost.Location;
+                LblGhostHitPoints.Text = fGame.Ghost.HitPoints.ToString();
+            }
+
+            if (!(fGame.Ghoul == null))
+            {
+                PicBoxGhoul.Location = fGame.Ghoul.Location;
+                LblGhoulHitPoints.Text = fGame.Ghoul.HitPoints.ToString();
+            }
         }
 
         private void UpdatePlayer()
@@ -107,12 +122,18 @@ namespace Lab2TheQuest
         private void UpdateWeapons()
         {
             if (fGame.WeaponInRoom is Sword) fPicBoxWeaponInRoom = PicBoxSword;
+            if (fGame.WeaponInRoom is PotionBlue) fPicBoxWeaponInRoom = PicBoxPotionBlue;
+            if (fGame.WeaponInRoom is PotionRed) fPicBoxWeaponInRoom = PicBoxPotionRed;
+            if (fGame.WeaponInRoom is Bow) fPicBoxWeaponInRoom = PicBoxBow;
+            if (fGame.WeaponInRoom is Mace) fPicBoxWeaponInRoom = PicBoxMace;
 
             foreach (PictureBox pbox in fPicBoxesWeapons)
                 pbox.Visible = false;
 
-            if (fGame.WeaponInRoom.IsPickedUp)
+            if (!fGame.WeaponInRoom.IsPickedUp)
+            {
                 fPicBoxWeaponInRoom.Visible = true;
+            }
         }
 
         #region Move Buttons

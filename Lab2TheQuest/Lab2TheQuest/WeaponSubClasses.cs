@@ -44,7 +44,82 @@ namespace Lab2TheQuest
 
         public override Game.WeaponName Name
         {
-            get { return Game.WeaponName.Sword; }
+            get { return Game.WeaponName.PotionBlue; }
+        }
+
+        public override void Attack(Game.Direction direction, Random rnd)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class PotionRed : Weapon, IPotion
+    {
+        protected PotionRed(Point p)
+            : base(p)
+        {
+        }
+
+        public PotionRed(Rectangle boundaries, Random rnd)
+            : base(boundaries, rnd)
+        {
+        }
+
+        public bool IsUsed { get; private set; }
+
+        public override Game.WeaponName Name
+        {
+            get { return Game.WeaponName.PotionRed; }
+        }
+
+        public override void Attack(Game.Direction direction, Random rnd)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class Bow : Weapon
+    {
+        protected Bow(Point p)
+            : base(p)
+        {
+        }
+
+        public Bow(Rectangle boundaries, Random rnd)
+            : base(boundaries, rnd)
+        {
+        }
+
+        public bool IsUsed { get; private set; }
+
+        public override Game.WeaponName Name
+        {
+            get { return Game.WeaponName.Bow; }
+        }
+
+        public override void Attack(Game.Direction direction, Random rnd)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class Mace : Weapon
+    {
+        protected Mace(Point p)
+            : base(p)
+        {
+        }
+
+        public Mace(Rectangle boundaries, Random rnd)
+            : base(boundaries, rnd)
+        {
+        }
+
+        public bool IsUsed { get; private set; }
+
+        public override Game.WeaponName Name
+        {
+            get { return Game.WeaponName.Mace; }
         }
 
         public override void Attack(Game.Direction direction, Random rnd)

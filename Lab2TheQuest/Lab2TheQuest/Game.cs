@@ -19,6 +19,7 @@ namespace Lab2TheQuest
             fPlayer = new Player(new Point(boundaries.Left + 10, boundaries.Top + 70));
 
             NewLevel();
+            NewLevel();
         }
 
         public enum Direction
@@ -50,6 +51,8 @@ namespace Lab2TheQuest
         public void MovePlayer(Direction playerMoveDirection)
         {
             fPlayer.Move(playerMoveDirection, Boundaries);
+            if (fPlayer.Nearby(WeaponInRoom.Location, 10))
+                fPlayer.PickUpWeapon(WeaponInRoom);
         }
 
         public void MoveAllObjects(Direction playerMoveDirection)
