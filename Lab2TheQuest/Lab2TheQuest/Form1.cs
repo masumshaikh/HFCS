@@ -142,6 +142,11 @@ namespace Lab2TheQuest
 
         private void UpdateInventory()
         {
+            foreach (PictureBox pbox in fPicBoxesInventory)
+                pbox.Visible = false;
+
+            foreach (PictureBox pbox in fPicBoxesWeapons)
+                pbox.Visible = false;
         }
 
         #region Move Buttons
