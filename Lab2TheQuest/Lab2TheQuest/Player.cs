@@ -72,7 +72,7 @@ namespace Lab2TheQuest
 
         public void PickUpWeapon(Weapon weaponToPickUp)
         {
-            this.Inventory.Add(weaponToPickUp);
+            Inventory.Add(weaponToPickUp);
             weaponToPickUp.BePickedUp();
             if (Inventory.Count == 1)
                 this.Equip(weaponToPickUp.Name);

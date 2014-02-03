@@ -132,6 +132,7 @@ namespace Lab2TheQuest
 
             if (!fGame.WeaponInRoom.IsPickedUp)
             {
+                fPicBoxWeaponInRoom.Location = fGame.WeaponInRoom.Location;
                 fPicBoxWeaponInRoom.Visible = true;
             }
         }
