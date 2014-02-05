@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataFrame", "DataFrame\DataFrame.csproj", "{574DBB3B-B642-4863-B720-198EA7CCDF3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataFrameTest", "DataFrameTest\DataFrameTest.csproj", "{99DDE018-B6BE-4256-B6E1-7A71757C752F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{574DBB3B-B642-4863-B720-198EA7CCDF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{574DBB3B-B642-4863-B720-198EA7CCDF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{574DBB3B-B642-4863-B720-198EA7CCDF3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99DDE018-B6BE-4256-B6E1-7A71757C752F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99DDE018-B6BE-4256-B6E1-7A71757C752F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99DDE018-B6BE-4256-B6E1-7A71757C752F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99DDE018-B6BE-4256-B6E1-7A71757C752F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
