@@ -13,7 +13,8 @@ namespace DataFrame
 
         public DataFrame(List<string> columnHeaders, List<string> rowHeaders)
         {
-            // todo check that column and row headers being passed contain no duplicates
+            // todo check that column being passed contain no duplicates
+            // todo row headers may contain duplicates
             fColumnHeaders = columnHeaders;
             fRowHeaders = rowHeaders;
             fValues = new dynamic[fRowHeaders.Count, fColumnHeaders.Count];
@@ -21,7 +22,8 @@ namespace DataFrame
 
         public DataFrame(List<string> columnHeaders, List<string> rowHeaders, dynamic[,] values)
         {
-            // todo check that column and row headers being passed contain no duplicates
+            // todo check that column being passed contain no duplicates
+            // todo row headers may contain duplicates
             fColumnHeaders = columnHeaders;
             fRowHeaders = rowHeaders;
 
@@ -29,24 +31,58 @@ namespace DataFrame
             fValues = values;
         }
 
-        public dynamic this[string colName, string rowName]
+        public DataFrame(List<string> columnHeaders, int numRows)
+        {
+            fColumnHeaders = columnHeaders;
+            fValues = new dynamic[numRows, fColumnHeaders.Count];
+        }
+
+        ////public dynamic this[string colName, string rowName]
+        ////{
+        ////    get
+        ////    {
+        ////        // todo do something if r and c not found below
+        ////        int r = fRowHeaders.IndexOf(rowName);
+        ////        int c = fColumnHeaders.IndexOf(colName);
+
+        ////        return fValues[r, c];
+        ////    }
+
+        ////    set
+        ////    {
+        ////        // todo do something if r and c not found below
+        ////        int r = fRowHeaders.IndexOf(rowName);
+        ////        int c = fColumnHeaders.IndexOf(colName);
+
+        ////        fValues[r, c] = value;
+        ////    }
+        ////}
+
+        public dynamic this[string colName, int rowNum]
         {
             get
             {
-                // todo do something if r and c not found below
-                int r = fRowHeaders.IndexOf(rowName);
                 int c = fColumnHeaders.IndexOf(colName);
-
-                return fValues[r, c];
+                return fValues[rowNum, c];
             }
-
             set
             {
-                // todo do something if r and c not found below
-                int r = fRowHeaders.IndexOf(rowName);
                 int c = fColumnHeaders.IndexOf(colName);
+                fValues[rowNum, c] = value;
+            }
+        }
 
-                fValues[r, c] = value;
+        public dynamic this[string colName, string conditionString]
+        {
+            // Conditions is sth like "Currency=GBP,Index=LIBOR". Find index of a row which matches conditionString. Return colName for that row.
+            // Split conditionString on commas
+            get
+            {
+                string[] conditions = conditionString.Split(',');
+                Dictionary<string, string> conditionsDict;
+                
+                // get keys
+
             }
         }
     }
