@@ -5,39 +5,49 @@ using System.Text;
 
 namespace DataFrame
 {
-    class DataFrame
+    public class DataFrame
     {
         private List<string> fColumnHeaders;
         private List<string> fRowHeaders;
-        private double[,] fValues;
+        private dynamic[,] fValues;
 
         public DataFrame(List<string> columnHeaders, List<string> rowHeaders)
         {
+            // todo check that column and row headers being passed contain no duplicates
             fColumnHeaders = columnHeaders;
             fRowHeaders = rowHeaders;
-            fValues = new double[fRowHeaders.Count, fColumnHeaders.Count];
+            fValues = new dynamic[fRowHeaders.Count, fColumnHeaders.Count];
         }
 
-        public DataFrame(List<string> columnHeaders, List<string> rowHeaders, double[,] values)
+        public DataFrame(List<string> columnHeaders, List<string> rowHeaders, dynamic[,] values)
         {
+            // todo check that column and row headers being passed contain no duplicates
             fColumnHeaders = columnHeaders;
             fRowHeaders = rowHeaders;
-            fValues = values;
 
             // todo dimensions are for losers
+            fValues = values;
         }
 
-        public double this[string colName, string rowName]
+        public dynamic this[string colName, string rowName]
         {
             get
             {
-                // find index of rowName in fRowHeaders
+                // todo do something if r and c not found below
                 int r = fRowHeaders.IndexOf(rowName);
-                int c = fColumnHeaders.IndexOf(rowName);
+                int c = fColumnHeaders.IndexOf(colName);
 
                 return fValues[r, c];
             }
-        }
 
+            set
+            {
+                // todo do something if r and c not found below
+                int r = fRowHeaders.IndexOf(rowName);
+                int c = fColumnHeaders.IndexOf(colName);
+
+                fValues[r, c] = value;
+            }
+        }
     }
 }
