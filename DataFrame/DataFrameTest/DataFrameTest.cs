@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using DataFrameNameSpace;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace DataFrameTest
@@ -6,38 +7,30 @@ namespace DataFrameTest
     [TestClass]
     public class DataFrameTest
     {
-        public static DataFrame.DataFrame ReturnDataFrame()
+        public static DataFrame ReturnDataFrame()
         {
-            var dataFrame = new DataFrame.DataFrame(
-                new List<string>() { "ford", "vauxhall" },
-                new List<string>() { "35932", "35933" },
-                new dynamic[,] { { 1.1, 1.2 }, { 2.1, 2.2 } });
-            return dataFrame;
+            string[] headers = new string[] { "date", "ccy", "scenario", "1w" };
+            string[] types = new string[] { "date", "string", "int", "double" };
+
+            DataFrame df = new DataFrame(headers, types);
+
+            return df;
         }
 
         [TestMethod]
         public void DataFrame_SetUp()
         {
-            var dataFrame = ReturnDataFrame();
-            Assert.AreEqual(2.1, dataFrame["ford", "35933"], 1e-6);
+            DataFrame df = ReturnDataFrame();
+            bool success = df.TryAddLine(new string[] { "18/11/2013", "GBP", "24", "0.0035" });
+            Assert.IsTrue(success);
         }
 
         [TestMethod]
-        public void DataFrame_Set()
+        public void TryToMakeJaggedColumns()
         {
-            var dataFrame = ReturnDataFrame();
-            dataFrame["ford", "35933"] = 5.4;
-            Assert.AreEqual(5.4, dataFrame["ford", "35933"], 1e-6);
-        }
-
-        [TestMethod]
-        public void DataFrame_MixedValueTypesSetUp()
-        {
-            var df = new DataFrame.DataFrame(new List<string>() { "Currency", "Index", "Number", "1W" }, 1);
-            df["Currency", 0] = "GBP";
-            df["Index", 0] = "LIBOR";
-            df["1W", 0] = 0.062;
-            Assert.AreEqual(0.062, df["1W", 0], 1e-6);
+            DataFrame df = ReturnDataFrame();
+            bool success = df.TryAddLine(new string[] { "18/11/2013", "GBP", "asdf", "0.0035" });
+            Assert.IsFalse(success);
         }
     }
 }

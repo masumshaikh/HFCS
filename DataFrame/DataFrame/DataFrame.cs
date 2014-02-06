@@ -1,97 +1,57 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+
 using System.Linq;
 using System.Text;
 
-namespace DataFrame
+namespace DataFrameNameSpace
 {
     public class DataFrame
     {
-        private List<string> fColumnHeaders;
-        private List<string> fRowHeaders;
-        private dynamic[,] fValues;
+        private string[] fColumnHeaders;
+        private string[] fColumnTypeStrings;
+        private DataColumn[] fColumns;
 
-        public DataFrame(List<string> columnHeaders, List<string> rowHeaders)
-        {
-            // todo check that column being passed contain no duplicates
-            // todo row headers may contain duplicates
-            fColumnHeaders = columnHeaders;
-            fRowHeaders = rowHeaders;
-            fValues = new dynamic[fRowHeaders.Count, fColumnHeaders.Count];
-        }
-
-        public DataFrame(List<string> columnHeaders, List<string> rowHeaders, dynamic[,] values)
-        {
-            // todo check that column being passed contain no duplicates
-            // todo row headers may contain duplicates
-            fColumnHeaders = columnHeaders;
-            fRowHeaders = rowHeaders;
-
-            // todo dimensions are for losers
-            fValues = values;
-        }
-
-        public DataFrame(List<string> columnHeaders, int numRows)
+        public DataFrame(string[] columnHeaders, string[] columnTypes)
         {
             fColumnHeaders = columnHeaders;
-            fValues = new dynamic[numRows, fColumnHeaders.Count];
-        }
+            fColumnTypeStrings = columnTypes;
+            
+            fColumns = new DataColumn[fColumnTypeStrings.Length];
 
-        ////public dynamic this[string colName, string rowName]
-        ////{
-        ////    get
-        ////    {
-        ////        // todo do something if r and c not found below
-        ////        int r = fRowHeaders.IndexOf(rowName);
-        ////        int c = fColumnHeaders.IndexOf(colName);
+            Debug.Assert(fColumnHeaders.Length == fColumnTypeStrings.Length, "The list of column headers did not have the same number of elements as the specifications of the data types in each columnn");
 
-        ////        return fValues[r, c];
-        ////    }
-
-        ////    set
-        ////    {
-        ////        // todo do something if r and c not found below
-        ////        int r = fRowHeaders.IndexOf(rowName);
-        ////        int c = fColumnHeaders.IndexOf(colName);
-
-        ////        fValues[r, c] = value;
-        ////    }
-        ////}
-
-        public dynamic this[string colName, int rowNum]
-        {
-            get
+            for (int i = 0; i < fColumnHeaders.Length; i++)
             {
-                int c = fColumnHeaders.IndexOf(colName);
-                return fValues[rowNum, c];
-            }
-            set
-            {
-                int c = fColumnHeaders.IndexOf(colName);
-                fValues[rowNum, c] = value;
+                fColumns[i] = new DataColumn(fColumnHeaders[i], fColumnTypeStrings[i]);
             }
         }
-
-        public dynamic this[string colName, string conditionString]
+        
+        public bool TryAddLine(string[] args)
         {
-            // Conditions is sth like "Currency=GBP,Index=LIBOR". Find index of a row which matches conditionString. Return colName for that row.
-            // Split conditionString on commas
-            get
+            if (args.Length != fColumnHeaders.Length)
+                return false;
+
+            bool success = true;
+            for (int i = 0; i < fColumnHeaders.Length; i++)
             {
-                string[] conditions = conditionString.Split(',');
-                Dictionary<string, string> conditionsDict = new Dictionary<string,string>();
-                
-                // Build dictionary { (Currency, GBP), (Index, Libor) }
-                foreach (string condition in conditions)
-                {
-                    string[] temp = condition.Split('=');
-                    conditionsDict[temp[0]] = temp[1];
-                }
-
-                // make sure that colName isn't equal to any of the conditions
-
-                // loop through fValues and find a row such that all the conditions match
+                // The false flag previews the addition of the new line without actually adding to the columns
+                success = success && fColumns[i].TryAdd(args[i], false);
             }
+
+            // If any of the columns failed, don't do anything and return false
+            if (!success)
+                return false;
+
+            // Now that we know all the columns were successful in the preview, go ahead and add the new line for real (ie, with the true flag)
+            for (int i = 0; i < fColumnHeaders.Length; i++)
+            {
+                fColumns[i].TryAdd(args[i], true);
+            }
+
+            return true;
         }
     }
 }
