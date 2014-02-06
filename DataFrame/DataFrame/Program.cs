@@ -16,12 +16,13 @@ namespace DataFrameNameSpace
 
             var df = new DataFrame(headers, types);
 
-            bool success = df.TryAddLine(new string[] { "18/11/2013", "GBP", "24", "0.0035" });
-            success = success && df.TryAddLine(new string[] { "18/11/2013", "AUD", "4", "0.088" });
+            df.TryAddLine(new string[] { "18/11/2013", "GBP", "24", "0.0035" });
+            df.TryAddLine(new string[] { "18/11/2013", "AUD", "4", "0.088" });
+            df.TryAddLine(new string[] { "18/11/2013", "AUD", "2", "0.971" });
 
-            Console.WriteLine(success);
 
-            df.TestFilter("GBP");
+            var filters = new Dictionary<string, string>() { { "ccy", "AUD" }, { "scenario", "2" } };
+            dynamic x = df.FirstOrFalse(filters,"1w");
         }
     }
 }

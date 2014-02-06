@@ -12,6 +12,7 @@ namespace DataFrameNameSpace
     {
         private string[] fColumnHeaders;
         private string[] fColumnTypeStrings;
+        private int fNumRows;
         private DataColumn[] fColumns;
 
         public DataFrame(string[] columnHeaders, string[] columnTypes)
@@ -51,13 +52,44 @@ namespace DataFrameNameSpace
                 fColumns[i].TryAdd(args[i], true);
             }
 
+            fNumRows++;
             return true;
         }
 
-        public void TestFilter(string singleFilter)
+        public dynamic FirstOrFalse(Dictionary<string, string> filters, string colNameToReturnValueFrom)
         {
-            Type temp = fColumns[1].DataType;
-            var filtered = fColumns[1].Data.Cast<object>().Where(s => (string)s == singleFilter);
+            // keep for future reference
+            // var filtered = fColumns[1].Data.Cast<dynamic>().Where(s => (string)s == singleFilter);
+
+            for (int i = 0; i < fNumRows; i++)
+            {
+                var x = fColumns[0].Data[0];
+                bool matchedAllFilters = true;
+
+                foreach (KeyValuePair<string, string> filter in filters)
+                {
+                    // find which DataColumn is implied by key
+                    int col = Array.FindIndex(fColumnHeaders, header => header == filter.Key);
+
+                    // if the data in this column is not equal to any of the filter values, then discard this row
+                    if (Convert.ToString(fColumns[col].Data[i]) != filter.Value)
+                    {
+                        matchedAllFilters = false;
+                        break;
+                    }
+                }
+
+                if (matchedAllFilters)
+                {
+                    // find which DataColumn is implied by colNameToReturnValueFrom
+                    int col = Array.FindIndex(fColumnHeaders, header => header == colNameToReturnValueFrom);
+
+                    // return data in this column and exit
+                    return fColumns[col].Data[i];
+                }
+            }
+
+            return false;
         }
     }
 }
