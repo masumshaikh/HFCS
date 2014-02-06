@@ -79,10 +79,18 @@ namespace DataFrame
             get
             {
                 string[] conditions = conditionString.Split(',');
-                Dictionary<string, string> conditionsDict;
+                Dictionary<string, string> conditionsDict = new Dictionary<string,string>();
                 
-                // get keys
+                // Build dictionary { (Currency, GBP), (Index, Libor) }
+                foreach (string condition in conditions)
+                {
+                    string[] temp = condition.Split('=');
+                    conditionsDict[temp[0]] = temp[1];
+                }
 
+                // make sure that colName isn't equal to any of the conditions
+
+                // loop through fValues and find a row such that all the conditions match
             }
         }
     }
