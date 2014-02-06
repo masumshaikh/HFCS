@@ -53,5 +53,11 @@ namespace DataFrameNameSpace
 
             return true;
         }
+
+        public void TestFilter(string singleFilter)
+        {
+            Type temp = fColumns[1].DataType;
+            var filtered = fColumns[1].Data.Cast<object>().Where(s => (string)s == singleFilter);
+        }
     }
 }

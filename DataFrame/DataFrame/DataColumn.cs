@@ -18,13 +18,14 @@ namespace DataFrameNameSpace
             fDataTypeMnemonic = dataTypeMnemonic;
 
             string dataTypeFull = TypeDict[dataTypeMnemonic];
-            Type elementType = Type.GetType(dataTypeFull);
+            DataType = Type.GetType(dataTypeFull);
             Type listType = typeof(List<>);
-            Type combinedType = listType.MakeGenericType(elementType);
+            Type combinedType = listType.MakeGenericType(DataType);
             Data = (IList)Activator.CreateInstance(combinedType);
         }
 
         public IList Data { get; set; }
+        public Type DataType { get; private set; }
 
         public bool TryAdd(string dataToAdd, bool forReal)
         {
