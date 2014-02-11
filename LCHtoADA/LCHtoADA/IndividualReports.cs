@@ -86,5 +86,38 @@ namespace LCHtoADA
                 return (DateTime)fDataTable.Rows[0]["CloseDate"];
             }
         }
+
+        public double this[string curveName, DateTime date, string term]
+        {
+            get
+            {
+                string[] split = curveName.Split('_');
+                string ccy = split[0];
+                string index = split[1];
+
+                string filter = string.Format("Currency = '{0}' And Index = '{1}' And ScenarioDate = '{2}'", ccy, index, date);
+
+                DataRow[] foundRows = fDataTable.Select(filter);
+                if (foundRows.Length > 0)
+                    return (double)foundRows[0][term];
+                else
+                    return -1.0;
+            }
+        }
+
+        public List<DateTime> AllDates()
+        {
+            List<DateTime> listOut = new List<DateTime>();
+            DataRowCollection rows = fDataTable.Rows;
+
+            foreach (DataRow row in rows)
+            {
+                DateTime date = (DateTime)row["ScenarioDate"];
+                if (!listOut.Contains(date))
+                    listOut.Add(date);
+            }
+
+            return listOut;
+        }
     }
 }

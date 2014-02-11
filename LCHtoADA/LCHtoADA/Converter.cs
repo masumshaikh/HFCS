@@ -84,7 +84,7 @@ namespace LCHtoADA
 
         public void BuildADATable()
         {
-            var dc = new DataColumn("Date", typeof(int));
+            var dc = new DataColumn("Date", typeof(double));
             fADATable.Columns.Add(dc);
 
             foreach (string curveName in CurveCurrenciesDict.Keys)
@@ -103,6 +103,33 @@ namespace LCHtoADA
                 string colName = string.Format("FxRate.{0}", ccy);
                 dc = new DataColumn(colName, typeof(double));
                 fADATable.Columns.Add(dc);
+            }
+        }
+
+        public void FillADATable()
+        {
+            List<DateTime> dates = fReport90.AllDates();
+            
+            // Check that 5 business days before base date doesn't overlap with the dates just found.
+
+            // First fill in first 5 rows: the dates will be the last 5 days from the base date
+
+            // Now work back through dates and add rows using the scenario shifts.
+            foreach (DateTime date in dates)
+            {
+                int scenarioNum = dates.IndexOf(date);
+                DataRow row = fADATable.NewRow();
+                row["Date"] = date.ToOADate();
+
+                foreach (string curveName in CurveCurrenciesDict.Keys)
+                {
+                    List<double> tenors = fReport79.AvailableTenors(curveName);
+                    foreach (double tenor in tenors)
+                    {
+                        string colName = string.Format("InterestRate.{0},{1}", curveName, tenor);
+                        row[colName] = fReport90[curveName, date, YearFracToTermString(tenor)];
+                    }
+                }
             }
         }
 
@@ -177,6 +204,93 @@ namespace LCHtoADA
         private string DummyRatePriceFactorLine(string ccy)
         {
             return string.Format("InterestRate.{0},Property_Aliases=,Curve=[(0,0)],Currency=,Day_Count=ACT_365,Accrual_Calendar=,Sub_Type=,Floor=<undefined>\n", ccy);
+        }
+
+        private bool IsClose(double x, double y, double tol)
+        {
+            return Math.Abs(x / y - 1) < tol;
+        }
+
+        private string YearFracToTermString(double yearFrac)
+        {
+            // Do this properly
+            double tol = 1e-2;
+            if (IsClose(yearFrac, 0.002739726027397, tol))
+                return "ON";
+            if (IsClose(yearFrac, 0.019178082191781, tol))
+                return "1W";
+            if (IsClose(yearFrac, 0.038356164383562, tol))
+                return "2W";
+            if (IsClose(yearFrac, 0.057534246575343, tol))
+                return "3W";
+            if (IsClose(yearFrac, 0.082191780821918, tol))
+                return "1M";
+            if (IsClose(yearFrac, 0.164383561643836, tol))
+                return "2M";
+            if (IsClose(yearFrac, 0.249315068493151, tol))
+                return "3M";
+            if (IsClose(yearFrac, 0.331506849315069, tol))
+                return "4M";
+            if (IsClose(yearFrac, 0.416438356164384, tol))
+                return "5M";
+            if (IsClose(yearFrac, 0.498630136986301, tol))
+                return "6M";
+            if (IsClose(yearFrac, 0.580821917808219, tol))
+                return "7M";
+            if (IsClose(yearFrac, 0.665753424657534, tol))
+                return "8M";
+            if (IsClose(yearFrac, 0.747945205479452, tol))
+                return "9M";
+            if (IsClose(yearFrac, 0.832876712328767, tol))
+                return "10M";
+            if (IsClose(yearFrac, 0.915068493150685, tol))
+                return "11M";
+            if (IsClose(yearFrac, 1.000000000000000, tol))
+                return "1Y";
+            if (IsClose(yearFrac, 1.249315068493150, tol))
+                return "15M";
+            if (IsClose(yearFrac, 1.498630136986300, tol))
+                return "18M";
+            if (IsClose(yearFrac, 1.747945205479450, tol))
+                return "21M";
+            if (IsClose(yearFrac, 2, tol))
+                return "2Y";
+            if (IsClose(yearFrac, 3, tol))
+                return "3Y";
+            if (IsClose(yearFrac, 4, tol))
+                return "4Y";
+            if (IsClose(yearFrac, 5, tol))
+                return "5Y";
+            if (IsClose(yearFrac, 6, tol))
+                return "6Y";
+            if (IsClose(yearFrac, 7, tol))
+                return "7Y";
+            if (IsClose(yearFrac, 8, tol))
+                return "8Y";
+            if (IsClose(yearFrac, 9, tol))
+                return "9Y";
+            if (IsClose(yearFrac, 10, tol))
+                return "10Y";
+            if (IsClose(yearFrac, 12, tol))
+                return "12Y";
+            if (IsClose(yearFrac, 15, tol))
+                return "15Y";
+            if (IsClose(yearFrac, 20, tol))
+                return "20Y";
+            if (IsClose(yearFrac, 25, tol))
+                return "25Y";
+            if (IsClose(yearFrac, 30, tol))
+                return "30Y";
+            if (IsClose(yearFrac, 35, tol))
+                return "35Y";
+            if (IsClose(yearFrac, 40, tol))
+                return "40Y";
+            if (IsClose(yearFrac, 45, tol))
+                return "45Y";
+            if (IsClose(yearFrac, 50, tol))
+                return "50Y";
+            
+            return string.Empty;
         }
 
         private string ActualRatePriceFactorLine(string curveName)
