@@ -24,8 +24,6 @@ namespace LCHtoADA
             this.ReadInData();
         }
 
-
-
         public DataTable DataTable
         {
             get
@@ -34,6 +32,14 @@ namespace LCHtoADA
             }
         }
         
+        public virtual DateTime BaseDate
+        {
+            get
+            {
+                return new DateTime(1900, 1, 1);
+            }
+        }
+
         private string FilePath { get; set; }
 
         public void SetUpColumns(string[] columnTypes)

@@ -9,10 +9,32 @@ namespace LCHtoADA
     public class Report79 : LCHFile
     {
         private static readonly string[] DataTypes = new string[] { "System.String", "System.DateTime", "System.DateTime", "System.Double", "System.Double", "System.Double" };
-
+        
         public Report79(string path)
             : base(path, DataTypes, '\t')
         {
+        }
+
+        public override DateTime BaseDate
+        {
+            get
+            {
+                return (DateTime)fDataTable.Rows[0]["CloseDate"];
+            }
+        }
+
+        public List<double> AvailableTenors(string curveName)
+        {
+            var listOut = new List<double>();
+            string filter = string.Format("Curve = '{0}_EOD'", curveName);
+            DataRow[] rows = fDataTable.Select(filter);
+
+            foreach (DataRow row in rows)
+            {
+                listOut.Add((double)row["AccrualFactor"]);
+            }
+
+            return listOut;
         }
     }
 
@@ -23,6 +45,14 @@ namespace LCHtoADA
         public Report18(string path)
             : base(path, DataTypes, '\t')
         {
+        }
+
+        public override DateTime BaseDate
+        {
+            get
+            {
+                return (DateTime)fDataTable.Rows[0]["CobDate"];
+            }
         }
 
         public double this[string fromCurrency]
@@ -47,6 +77,14 @@ namespace LCHtoADA
         public Report90(string path)
             : base(path, DataTypes, '\t')
         {
+        }
+
+        public override DateTime BaseDate
+        {
+            get
+            {
+                return (DateTime)fDataTable.Rows[0]["CloseDate"];
+            }
         }
     }
 }
