@@ -84,7 +84,7 @@ namespace LCHtoADA
 
         public void BuildADATable()
         {
-            var dc = new DataColumn("Date", typeof(double));
+            var dc = new DataColumn("DATE", typeof(double));
             fADATable.Columns.Add(dc);
 
             foreach (string curveName in CurveCurrenciesDict.Keys)
@@ -110,15 +110,43 @@ namespace LCHtoADA
         {
             List<DateTime> dates = fReport90.AllDates();
             
-            // Check that 5 business days before base date doesn't overlap with the dates just found.
-
+            // TODO Check that 5 business days before base date doesn't overlap with the dates just found.
             // First fill in first 5 rows: the dates will be the last 5 days from the base date
+            const int VarHorizon = 5;
+            for (int i = 0; i < VarHorizon; i++)
+            {
+                DateTime date = BaseDate.AddWorkingDays(-i);
+                DataRow row = fADATable.NewRow();
+
+                // Fill in date
+                row["Date"] = date.ToOADate();
+                
+                // Fill in zero rates from report 79
+                foreach (string curveName in CurveCurrenciesDict.Keys)
+                {
+                    List<double> tenors = fReport79.AvailableTenors(curveName);
+                    foreach (double tenor in tenors)
+                    {
+                        string colName = string.Format("InterestRate.{0},{1}", curveName, tenor);
+                        row[colName] = fReport79[curveName, tenor];
+                    }
+                }
+
+                foreach (string ccy in ForecastRateDict.Keys)
+                {
+                    string colName = string.Format("FxRate.{0}", ccy);
+                    row[colName] = 1.0 / fReport18[ccy];
+                }
+
+                fADATable.Rows.Add(row);
+            }
 
             // Now work back through dates and add rows using the scenario shifts.
+            int rowNum = VarHorizon;
             foreach (DateTime date in dates)
             {
-                int scenarioNum = dates.IndexOf(date);
                 DataRow row = fADATable.NewRow();
+
                 row["Date"] = date.ToOADate();
 
                 foreach (string curveName in CurveCurrenciesDict.Keys)
@@ -127,10 +155,55 @@ namespace LCHtoADA
                     foreach (double tenor in tenors)
                     {
                         string colName = string.Format("InterestRate.{0},{1}", curveName, tenor);
-                        row[colName] = fReport90[curveName, date, YearFracToTermString(tenor)];
+                        double shift = fReport90[curveName, date, YearFracToTermString(tenor)];
+                        shift *= 0.0001; // convert from bp to actual value.
+                        row[colName] = UndoRateShift((double)fADATable.Rows[rowNum - VarHorizon][colName], shift);
                     }
                 }
+
+                foreach (string ccy in ForecastRateDict.Keys)
+                {
+                    string colName = string.Format("FxRate.{0}", ccy);
+                    double shift = fReport90[ccy, date];
+                    shift *= 0.01; // convert from % to actual value.
+                    row[colName] = this.UndoFxShift((double)fADATable.Rows[rowNum - VarHorizon][colName], shift);
+                }
+
+                rowNum++;
+                fADATable.Rows.Add(row);
+                Console.WriteLine(rowNum);
             }
+        }
+
+        public void ToADA(string outPath)
+        {
+            using (StreamWriter sw = new StreamWriter(outPath))
+                sw.Write(this.ToADA());
+        }
+
+        public string ToADA()
+        {
+            StringBuilder text = new StringBuilder(string.Empty);
+            text.Append("# LCH returns data\n");
+            text.Append("#Columns\tRows\n");
+            text.AppendFormat("{0}\t{1}\n", fADATable.Columns.Count, fADATable.Rows.Count);
+
+            foreach (DataColumn column in fADATable.Columns)
+                text.AppendFormat("{0}\t", column.ColumnName);
+
+            text.Append("\nSeedVol\nVolFloor\n");
+
+            for (int i = fADATable.Rows.Count - 1; i >= 0; i--)
+            {
+                foreach (DataColumn dc in fADATable.Columns)
+                {
+                    text.AppendFormat("{0}\t", fADATable.Rows[i][dc]);
+                }
+
+                text.AppendFormat("\n");
+            }
+
+            return text.ToString();
         }
 
         public void ToDat(string outPath)
@@ -193,7 +266,14 @@ namespace LCHtoADA
 
         public bool HaveSameBaseDate(IList<LCHFile> files)
         {
-            return files.All(file => file.BaseDate == files[0].BaseDate);
+            bool result = true;
+            foreach (LCHFile file in files)
+            {
+                if (file.BaseDate != files[0].BaseDate)
+                    result = false;
+            }
+
+            return result;
         }
 
         private string FxPriceFactorLine(string ccy)
@@ -206,6 +286,38 @@ namespace LCHtoADA
             return string.Format("InterestRate.{0},Property_Aliases=,Curve=[(0,0)],Currency=,Day_Count=ACT_365,Accrual_Calendar=,Sub_Type=,Floor=<undefined>\n", ccy);
         }
 
+        private string ActualRatePriceFactorLine(string curveName)
+        {
+            StringBuilder line = new StringBuilder(string.Empty);
+            line.AppendFormat("InterestRate.{0},Property_Aliases=,Curve=[", curveName);
+
+            string filter = string.Format("Curve = '{0}'", curveName + "_EOD");
+            DataRow[] rows = fReport79.DataTable.Select(filter);
+
+            foreach (DataRow dataRow in rows)
+            {
+                line.AppendFormat("({0},{1}),", dataRow["AccrualFactor"], dataRow["ZeroRate"]);
+            }
+
+            // remove trailing comma
+            line = line.Remove(line.Length - 1, 1);
+
+            line.Append("],");
+            line.Append(string.Format("Currency={0},Day_Count=ACT_365,Accrual_Calendar=,Sub_Type=,Floor=<undefined>", CurveCurrenciesDict[curveName]));
+            line.Append("\n");
+            return line.ToString();
+        }
+        
+        private double UndoRateShift(double x, double shift)
+        {
+            return x - shift;
+        }
+
+        private double UndoFxShift(double x, double shift)
+        {
+            return (1.0 + shift) * x;
+        }
+
         private bool IsClose(double x, double y, double tol)
         {
             return Math.Abs(x / y - 1) < tol;
@@ -213,7 +325,7 @@ namespace LCHtoADA
 
         private string YearFracToTermString(double yearFrac)
         {
-            // Do this properly
+            // TODO Do this properly
             double tol = 1e-2;
             if (IsClose(yearFrac, 0.002739726027397, tol))
                 return "ON";
@@ -291,28 +403,6 @@ namespace LCHtoADA
                 return "50Y";
             
             return string.Empty;
-        }
-
-        private string ActualRatePriceFactorLine(string curveName)
-        {
-            StringBuilder line = new StringBuilder(string.Empty);
-            line.AppendFormat("InterestRate.{0},Property_Aliases=,Curve=[", curveName);
-
-            string filter = string.Format("Curve = '{0}'", curveName + "_EOD");
-            DataRow[] rows = fReport79.DataTable.Select(filter);
-
-            foreach (DataRow dataRow in rows)
-            {
-                line.AppendFormat("({0},{1}),", dataRow["AccrualFactor"], dataRow["ZeroRate"]);
-            }
-
-            // remove trailing comma
-            line = line.Remove(line.Length - 1, 1);
-
-            line.Append("],");
-            line.Append(string.Format("Currency={0},Day_Count=ACT_365,Accrual_Calendar=,Sub_Type=,Floor=<undefined>", CurveCurrenciesDict[curveName]));
-            line.Append("\n");
-            return line.ToString();
         }
     }
 }

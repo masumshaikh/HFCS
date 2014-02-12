@@ -23,6 +23,20 @@ namespace LCHtoADA
             }
         }
 
+        public double this[string curveName, double tenor]
+        {
+            get
+            {
+                string filter = string.Format("Curve = '{0}_EOD' And AccrualFactor = '{1}'", curveName, tenor);
+                DataRow[] foundRows = fDataTable.Select(filter);
+
+                if (foundRows.Length > 0)
+                    return (double)foundRows[0]["ZeroRate"];
+                else
+                    return -1.0;
+            }
+        }
+
         public List<double> AvailableTenors(string curveName)
         {
             var listOut = new List<double>();
@@ -100,6 +114,20 @@ namespace LCHtoADA
                 DataRow[] foundRows = fDataTable.Select(filter);
                 if (foundRows.Length > 0)
                     return (double)foundRows[0][term];
+                else
+                    return -1.0;
+            }
+        }
+
+        public double this[string ccy, DateTime date]
+        {
+            get
+            {
+                string filter = string.Format("Currency = '{0}' And ScenarioDate = '{1}'", ccy, date);
+
+                DataRow[] foundRows = fDataTable.Select(filter);
+                if (foundRows.Length > 0)
+                    return (double)foundRows[0]["ScenarioFXRateShift"];
                 else
                     return -1.0;
             }
