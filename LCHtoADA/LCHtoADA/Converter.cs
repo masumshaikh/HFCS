@@ -191,6 +191,7 @@ namespace LCHtoADA
             foreach (DataColumn column in fADATable.Columns)
                 text.AppendFormat("{0}\t", column.ColumnName);
 
+            text = text.Remove(text.Length - 1, 1);
             text.Append("\nSeedVol\nVolFloor\n");
 
             for (int i = fADATable.Rows.Count - 1; i >= 0; i--)
@@ -200,6 +201,7 @@ namespace LCHtoADA
                     text.AppendFormat("{0}\t", fADATable.Rows[i][dc]);
                 }
 
+                text = text.Remove(text.Length - 1, 1);
                 text.AppendFormat("\n");
             }
 
