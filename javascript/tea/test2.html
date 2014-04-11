@@ -47,23 +47,24 @@
 
 <div id="content">
       <p>With thanks to <a href="http://www.movable-type.co.uk/scripts/tea-block.html">Chris Veness</a> and his javascript implementation of the TEA cipher. </p>
-      <p>Paragraph 1.</p>
-      <p>Paragraph 2.</p>
+      <p>The idea is, you have one very simple master password. It has to be simple enough to be easy to remember, but not so common that you forget what it is! You put that in the "Master" field below.</p>
+      <p>Next, to generate a password for, say, hotmail, Just type in the name of the site in the second field. Click "Generate". Voila! You have a password that is impossible to guess, but easy to remember!</p>
+      <p>Do this for every</p>
       <form name="f">
       <fieldset><legend>Functional demo</legend>
         <table>
           <tr> 
-            <td>Master:</td>
-            <td><input type="text" name="password" value="encryptioñ-pw" class="w12"></td>
+            <td>Password:</td>
+            <td><input type="text" name="password" value="master" class="w12"></td>
           </tr>
           <tr> 
-            <td>Plaintext:</td>
-            <td><textarea name="plaintxt" class="w48">søme highly secret text to be encrypteđ</textarea></td>
+            <td>Site:</td>
+            <td><input type="text" name="plaintxt" value="site" class="w12"></td>
           </tr>
           <tr> 
             <td><button type="button"
-              onClick='f.encrypted.value = Tea.encrypt(f.plaintxt.value, f.password.value)'>Encrypt it:</button></td>
-            <td><textarea name="encrypted" class="w48"></textarea></td>
+              onClick='f.encrypted.value = Tea.encrypt(f.plaintxt.value, f.password.value)'>Generate:</button></td>
+            <td><input type="text" name="encrypted" class="w12"></td>
           </tr>
         </table>
       </fieldset>
