@@ -19,6 +19,7 @@ namespace LCHtoADA
             
             c.FillADATable();
             c.ToADA(testPath + "outADA.ada");
+            c.ToDat(testPath + "outDAT.dat");
         }
     }
 }
