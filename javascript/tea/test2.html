@@ -46,43 +46,44 @@
 </div>
 
 <div id="content">
-      <p>With thanks to <a href="http://www.movable-type.co.uk/scripts/tea-block.html">Chris Veness</a>
+		<p>With thanks to <a href="http://www.movable-type.co.uk/scripts/tea-block.html">Chris Veness</a>
 			and his javascript implementation of the Block TEA cipher (<i>© 2005-2012 Chris Veness</i>). </p>
-      <p>The idea is, you have one very simple master password which will generate random (and hence strong) passwords for all your other sites.
+		<p>Enter a master password (which you should not change) and the name of a site to get a password for that site.</p>
+		<form name="f">
+		<fieldset><legend>Password Generator</legend>
+			<table>
+				<tr> 
+					<td>Master:</td>
+					<td><input type="password" name="password" value="master" class="w12"></td>
+				</tr>
+				<tr> 
+					<td>Site:</td>
+					<td><input type="text" name="plaintxt" value="site" class="w12"></td>
+				</tr>
+				<tr> 
+					<td><button type="button"
+					  onClick='f.encrypted.value = Tea.encrypt(f.plaintxt.value, f.password.value)'>Generate:</button></td>
+					<td><input type="text" name="encrypted" class="w12"></td>
+				</tr>
+			</table>
+      </fieldset>
+  </form>
+        <p>The idea is, you have one very simple master password which will generate random (and hence strong) passwords for all your other sites.
 			The generated passwords will not be stored anywhere
 			(it's all very well having one of those encrypted password containers, but what happens if <i>that</i> gets hacked?),
 			but will be simple to recover if you forget them.</p>
-	  <p>The master password has to be simple enough to be easy to remember, but not so common that you forget what it is!
+		<p>The master password has to be simple enough to be easy to remember, but not so common that you forget what it is!
 			You put that in the "Master" field below.</p>
-      <p>Next, to generate a password for, say, hotmail, just type in the name of the site in the second field. Click "Generate".
+		<p>Next, to generate a password for, say, hotmail, just type in the name of the site in the second field. Click "Generate".
 			Voila! You have a password that is impossible to guess, but easy to recover if you forget it! I plan to leave this webpage up,
 			so you can get to it whenever you need to.</p>
-      <p>Do this for every site for which you need a password.</p>
-	  <p>Some points:</p>
-	  <li>If you have to change your hotmail password after this, just use hotmail1, hotmail2 etc to generate new ones.
+		<p>Do this for every site for which you need a password.</p>
+		<p>Some points:</p>
+		<li>If you have to change your hotmail password after this, just use hotmail1, hotmail2 etc to generate new ones.
 			Successive passwords are very different, so even if someone finds out your password once, they won't be able to guess the next one.</li>
-	  <li>Always use lower-case characters everywhere in the "master" and "site" fields.
+		<li>Always use lower-case characters everywhere in the "master" and "site" fields.
 			This is because you don't want to have to remember if you used "ebay" or "eBay" later on.</li>
-	  <li>Nothing is being sent over the internet on this page: the generation is done entirely on your computer.</li>
-      <form name="f">
-      <fieldset><legend>Password Generator</legend>
-        <table>
-          <tr> 
-            <td>Master:</td>
-            <td><input type="password" name="password" value="master" class="w12"></td>
-          </tr>
-          <tr> 
-            <td>Site:</td>
-            <td><input type="text" name="plaintxt" value="site" class="w12"></td>
-          </tr>
-          <tr> 
-            <td><button type="button"
-              onClick='f.encrypted.value = Tea.encrypt(f.plaintxt.value, f.password.value)'>Generate:</button></td>
-            <td><input type="text" name="encrypted" class="w12"></td>
-          </tr>
-        </table>
-      </fieldset>
-  </form>
+		<li>Nothing is being sent over the internet on this page: the generation is done entirely on your computer.</li>
 </div>
 
 </body>
