@@ -1,0 +1,32 @@
+<html>
+<header>
+	<script src="jquery-1.11.0.js"></script>
+	<script src="tea-block.js">/* Block TEA (xxtea) JavaScript implementation */</script>
+	<script src="base64.js">/* Base64 encoding */</script>
+	<script src="utf8.js">/* UTF-8 encoding */</script>
+	<script src="popup.js"></script>
+	
+
+</header>
+
+<body>
+	<form name="f" id="f">
+		<fieldset><legend>Password Generator</legend>
+			<table>
+				<tr> 
+					<td>Master:</td>
+					<td><input type="password" id="master" value="master" class="w12"></td>
+				</tr>
+				<tr> 
+					<td>Site:</td>
+					<td><input type="text" id="plaintext" value="site" class="w12"></td>
+				</tr>
+				<tr> 
+					<td><button type="button" id="generate">Generate:</button></td>
+					<td><input type="text" id="encrypted" class="w12" value="click generate"></td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
+</body>
+</html>
